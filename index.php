@@ -9,7 +9,7 @@
 require 'flight/Flight.php';
 
 Flight::route('/', function(){
-    echo 'TARA!';
+    echo 'Github Test';
 });
 
 Flight::start();
