@@ -9,7 +9,7 @@
 				Immediate Task
 			</a>
 		</li>
-
+<!-- if ($_SESSION['user_admin'] ==0 { include ("views/user.php);} if ($_SESSION['user_admin'] ==1) { include("views/admin.php");
 	<?php if ($isadmin): ?>
 		<li>
 			<a href='/items'>
@@ -35,8 +35,10 @@
 	<?php else: ?>
 		<li>
 			<!-- absolute link has a / -->
-			<a href='/login'>
-				Login
+		<!-- <a href='/login'>
+				Login -->
+			<a href='/user_registration'>
+				User Registration
 			</a>
 		</li>
 	<?php endif; ?>
