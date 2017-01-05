@@ -7,6 +7,7 @@
  	<meta name='viewport' content='width=device-width, initial-scale=10'>
      <!-- bring css style sheet -->
   <link rel='stylesheet' href='app/css/default_layout.css'>
+  <link rel='stylesheet' href='app/bootstrap/bootstrap/css/bootstrap.css'>
 </head>
 <body>
   <div class='container'>
