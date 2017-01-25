@@ -17,7 +17,7 @@
         <div class="row">
           <div class="col-md-12">
             <h1 class="text-center text-primary">Team</h1>
-            <p class="text-center">We are a group of skilled individuals.</p>
+           <!-- <p class="text-center">We are </p> -->
           </div>
         </div>
         <div class="row">
