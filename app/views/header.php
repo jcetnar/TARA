@@ -1,64 +1,61 @@
-<nav class='navbar navbar-default">
-	<div class="container-fluid">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-espanded="false">
-			<span class="sr-only">Toggle navigation</span?
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand" href="#">TARA</a>
-	</div>
-	<div class="collapse navbar-collapse" id="bs-example-navbar=collapse-1">
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Status <span class="sr-only"> (current)</span></a></li>
-			<li><a href="/immediate">Request Immediate Task</a></li>
-		</ul>
-	</div>
-	</div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">TARA</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <!-- <button class="btn btn-danger navbar-btn">Immediate Task</button> -->
+      
+      
+      <button type="button" class="btn btn-info btn-small" data-toggle="modal" data-target="#myModal">Immediate Task</button>
+         <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Request Immediate Task</h4>
+                </div>
+                <div class="modal-body">
+                  <p>This is a small modal.</p>
+                  <div class="container">
+                  <form class="form-inline">
+                    <div class="form-group">
+                      <label for="email">Email:</label>
+                      <input type="email" class="form-control" id="email" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                      <label for="pwd">Password:</label>
+                      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox"> Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                  </form>
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>   
+            </div>
+          </div>
+      
+      <?php if ($isadmin): ?>
+      <li><a href="/objects">Objects</a></li>
+      <li><a href="/calendar">Calendar</a></li>
+      <li><a href="/emergency">Emergency Contact</a></li>
+      <?php endif; ?>
+    </ul>
+      
+    <ul class="nav navbar-nav navbar-right">
+        <?php if ($isadmin): ?>
+        <li><a href="#">Logout</a></li>
+        <?php else: ?>
+        <li><a href="/login">Login</a></li>
+        <?php endif; ?>
+    </ul>
+  </div>
 </nav>
-<!--
-<ul class='nav nav-pills'> 
-		<li role ="presentation" class="active">
-			<a href="/status">Status
-			<!--   <button type="button" class="btn btn-default navbar-btn">Status</button> -->
-			</a>
-		</li>
-		<li role ="presentation">
-			<a href='/immediatetask'>
-				Immediate Task
-			</a>
-		</li>
-<!-- if ($_SESSION['user_admin'] ==0 { include ("views/user.php);} if ($_SESSION['user_admin'] ==1) { include("views/admin.php"); -->
-	<?php if ($isadmin): ?>
-		<li role="presentation">
-			<a href='/items'>
-				Items
-			</a>
-		</li>
-		<li role="presentation">
-			<a href='/calendar'>
-				Calendar
-			</a>
-		</li>
-		<li role="presentation">
-			<a href='/contact'>
-				Contact
-			<!-- for emergency contact info -->
-			</a>
-		</li>
-		<li role="presentation">
-			<a href='/logout'>
-				Logout
-			</a>
-		</li>
-	<?php else: ?>
-		<li role="presentation">
-			<!-- absolute link has a / -->
-		 <a href='/login'>
-				Login
-			</a>
-		</li>
-	<?php endif; ?>
-</ul>
--->
