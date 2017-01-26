@@ -52,7 +52,7 @@
       
     <ul class="nav navbar-nav navbar-right">
         <?php if ($isadmin): ?>
-        <li><a href="#">Logout</a></li>
+        <li><a href="/logout">Logout</a></li>
         <?php else: ?>
         <li><a href="/login">Login</a></li>
         <?php endif; ?>

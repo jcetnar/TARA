@@ -6,9 +6,6 @@ function checkadmin($username, $password){
     $stmt = $pdo->prepare('SELECT isadmin FROM users WHERE username=:username AND password=:password LIMIT 1');
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-    //added from internet below
-   // session_start();
-    //added from internet above
     $stmt->execute();
     
     $results = $stmt->fetch();
@@ -18,5 +15,5 @@ function checkadmin($username, $password){
 }
 
 function isadmin(){
-    return true; 
+    return (isset($_SESSION['isadmin'])) ? $_SESSION['isadmin'] : false; 
 }
