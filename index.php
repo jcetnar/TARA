@@ -37,6 +37,7 @@ Flight::route('POST /login', function(){
     $request = Flight::request();
     $username = $request->data['username'];
     $password = $request->data['password'];
+    // Fool around with to get better validation of correct input
     if (!empty($username) && !empty($password)){
         if (checkadmin($username, $password)){
             $_SESSION['isadmin']=true;
@@ -53,13 +54,24 @@ Flight::route('POST /login', function(){
     }
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
     Flight::render('footer', array(), 'footer_content');
-    Flight::render('layout', array('title' => 'TARA Objects Page'));
+    Flight::render('layout', array('title' => 'TARA Login Page'));
 });
 
 
 Flight::route('/objects', function(){
+    $request = Flight::request();
+    if ($request->method=='POST' && isadmin()){
+        $object_name = $request->data['object_name'];
+        $rfid = $request->data['rfid'];
+        $object_type = $request->data['object_type'];
+         if (!empty($object_name) && !empty($rfid) && isset($object_type)){
+             $res = insert_object($object_name, $rfid, $object_type);
+         }
+    }
+    
+    
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('objects', array(), 'body_content');
+    Flight::render('objects', array('objects' => get_objects()), 'body_content');
     Flight::render('footer', array(), 'footer_content');
     Flight::render('layout', array('title' => 'TARA Objects Page'));
 });
