@@ -45,7 +45,7 @@ Flight::route('POST /login', function(){
         }
         else {
             Flight::render('login', array(), 'body_content');
-            Flight::render('message', array('message'=> 'incorrect login','severity'=>'error'), 'message_content');
+            Flight::render('message', array('message'=> 'incorrect login','severity'=>'danger'), 'message_content');
         }
     }
     else {
@@ -65,7 +65,11 @@ Flight::route('/objects', function(){
         $rfid = $request->data['rfid'];
         $object_type = $request->data['object_type'];
          if (!empty($object_name) && !empty($rfid) && isset($object_type)){
-             $res = insert_object($object_name, $rfid, $object_type);
+            try {
+             insert_object($object_name, $rfid, $object_type);
+            } catch (Exception $e){
+                Flight::render('message', array('message'=> $e->getMessage(),'severity'=>'warning'), 'message_content'); 
+            }
          }
     }
     
