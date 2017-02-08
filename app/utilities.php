@@ -36,3 +36,21 @@ function get_objects(){
     $results = $stmt->fetchAll();
     return $results;
 }
+
+function insert_navigation($array_l, $array_w, $location){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('INSERT INTO navigation (array_l, array_w, location) VALUES (:array_l, :array_w, :location)');
+    $stmt->bindParam(':array_l', $array_l, PDO::PARAM_INT);
+    $stmt->bindParam(':array_w', $array_w, PDO::PARAM_INT);
+    $stmt->bindParam(':location', $location, PDO::PARAM_INT);
+    return $stmt->execute();
+}
+
+function get_navigation(){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('SELECT * FROM navigation LIMIT 200');
+    $stmt->execute();
+    
+    $results = $stmt->fetchAll();
+    return $results;
+}

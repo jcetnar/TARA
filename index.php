@@ -80,10 +80,34 @@ Flight::route('/objects', function(){
     Flight::render('layout', array('title' => 'TARA Objects Page'));
 });
 
-Flight::route('/calendar', function(){
+
+Flight::route('/navigation', function(){
+    $request = Flight::request();
+    if ($request->method=='POST' && isadmin()){
+        $array_l = $request->data['array_l'];
+        $array_w = $request->data['array_w'];
+        $location = $request->data['location'];
+         if (!empty($array_l) && !empty($array_w) && isset($location)){
+            try {
+             insert_navigation($array_l, $array_w, $location);
+            } catch (Exception $e){
+                Flight::render('message', array('message'=> $e->getMessage(),'severity'=>'warning'), 'message_content'); 
+            }
+         }
+    }
+    
+    
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('calendar', array(), 'body_content');
-    Flight::render('task', array(), 'task_bar');
+    Flight::render('navigation', array('navigation' => get_navigation()), 'body_content');
+    Flight::render('footer', array(), 'footer_content');
+    Flight::render('layout', array('title' => 'TARA Navigation Page'));
+});
+
+
+Flight::route('/schedule', function(){
+    Flight::render('header', array('isadmin' => isadmin()), 'header_content');
+    Flight::render('schedule', array(), 'body_content');
+   // Flight::render('task', array(), 'task_bar');
     Flight::render('footer', array(), 'footer_content');
     Flight::render('layout', array('title' => 'TARA Calendar Page'));
 });
@@ -102,9 +126,9 @@ Flight::route('/about', function(){
     Flight::render('layout', array('title' => 'TARA About Page'));
 });
 
-Flight::route('/test', function(){
+Flight::route('/grid', function(){
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('test', array(), 'body_content');
+    Flight::render('grid', array(), 'body_content');
     Flight::render('footer', array(), 'footer_content');
     Flight::render('layout', array('title' => 'TARA Test'));
 });

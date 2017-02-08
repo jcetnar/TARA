@@ -44,8 +44,9 @@
           </div>
       
       <?php if ($isadmin): ?>
+      <li><a href="/navigation">Navigation</a></li>
       <li><a href="/objects">Objects</a></li>
-      <li><a href="/calendar">Calendar</a></li>
+      <li><a href="/schedule">Schedule</a></li>
       <li><a href="/emergency">Emergency Contact</a></li>
       <?php endif; ?>
     </ul>

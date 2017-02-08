@@ -46,7 +46,7 @@
                 <?php endif; ?>
             </td>
             <td>
-                <button class="btn btn-default">Delete</button>
+                <button class="btn btn-sm">Delete</button>
             </td>
         </tr>
       <?php endforeach; ?>
