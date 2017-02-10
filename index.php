@@ -106,8 +106,8 @@ Flight::route('/navigation', function(){
 
 Flight::route('/schedule', function(){
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('schedule', array(), 'body_content');
-   // Flight::render('task', array(), 'task_bar');
+    Flight::render('grid', array(), 'body_content');
+   // Flight::render('schedule', array(), 'task_bar');
     Flight::render('footer', array(), 'footer_content');
     Flight::render('layout', array('title' => 'TARA Calendar Page'));
 });
@@ -136,7 +136,7 @@ Flight::route('/grid', function(){
 
 Flight::route('/task', function(){
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('task', array(), 'body_content');
+    Flight::render('tasks', array(), 'body_content');
     Flight::render('footer', array(), 'footer_content');
     Flight::render('layout', array('title' => 'TARA Task Page'));
 });

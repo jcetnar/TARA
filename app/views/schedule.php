@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="http://www.prepbootstrap.com/Content/shieldui-lite/dist/css/light/all.min.css" />
 <script type="text/javascript" src="http://www.prepbootstrap.com/Content/shieldui-lite/dist/js/shieldui-lite-all.min.js"></script>
 
+<script type="text/javascript" src="/Users/jessicacetnar/Sites/tara/app/views/shortGridData.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $("#grid").shieldGrid({

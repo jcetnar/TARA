@@ -18,19 +18,15 @@
                   <h4 class="modal-title">Request Immediate Task</h4>
                 </div>
                 <div class="modal-body">
-                  <p>This is a small modal.</p>
                   <div class="container">
                   <form class="form-inline">
                     <div class="form-group">
-                      <label for="email">Email:</label>
-                      <input type="email" class="form-control" id="email" placeholder="Enter email">
+                      <label for="text">Name:</label>
+                      <input type="text" class="form-control" id="text" placeholder="Morning Pills">
                     </div>
                     <div class="form-group">
-                      <label for="pwd">Password:</label>
-                      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-                    </div>
-                    <div class="checkbox">
-                      <label><input type="checkbox"> Remember me</label>
+                      <label for="text">Objects</label>
+                      <input type="text" class="form-control" id="pwd" placeholder="Select Objects">
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                   </form>
@@ -44,9 +40,9 @@
           </div>
       
       <?php if ($isadmin): ?>
-      <li><a href="/navigation">Navigation</a></li>
-      <li><a href="/objects">Objects</a></li>
-      <li><a href="/schedule">Schedule</a></li>
+      <li><a href="/navigation">Room Setup</a></li>
+      <li><a href="/objects">Object Library</a></li>
+      <li><a href="/schedule">Scheduling</a></li>
       <li><a href="/emergency">Emergency Contact</a></li>
       <?php endif; ?>
     </ul>
