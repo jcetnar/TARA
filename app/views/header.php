@@ -4,12 +4,18 @@
       <a class="navbar-brand" href="/">TARA</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/">Home</a></li>
       <li><a href="/about">About</a></li>
-      <!-- <button class="btn btn-danger navbar-btn">Immediate Task</button> -->
       
+     
+
       
-      <button type="button" class="btn btn-info btn-small" data-toggle="modal" data-target="#myModal">Immediate Task</button>
+      <?php if ($isadmin): ?>
+      <li><a href="/navigation">Room Setup</a></li>
+      <li><a href="/objects">Object Library</a></li>
+      <li><a href="/tasks">Scheduling</a></li>
+      <li><a href="/emergency">Emergency Contact</a></li>
+      <?php endif; ?>
+        <button type="button" class="btn btn-info btn-small navbar-btn" data-toggle="modal" data-target="#myModal">Immediate Task</button>
          <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
@@ -38,13 +44,6 @@
               </div>   
             </div>
           </div>
-      
-      <?php if ($isadmin): ?>
-      <li><a href="/navigation">Room Setup</a></li>
-      <li><a href="/objects">Object Library</a></li>
-      <li><a href="/schedule">Scheduling</a></li>
-      <li><a href="/emergency">Emergency Contact</a></li>
-      <?php endif; ?>
     </ul>
       
     <ul class="nav navbar-nav navbar-right">

@@ -103,15 +103,6 @@ Flight::route('/navigation', function(){
     Flight::render('layout', array('title' => 'TARA Navigation Page'));
 });
 
-
-Flight::route('/schedule', function(){
-    Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('grid', array(), 'body_content');
-   // Flight::render('schedule', array(), 'task_bar');
-    Flight::render('footer', array(), 'footer_content');
-    Flight::render('layout', array('title' => 'TARA Calendar Page'));
-});
-
 Flight::route('/emergency', function(){
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
     Flight::render('emergency', array(), 'body_content');
@@ -126,15 +117,7 @@ Flight::route('/about', function(){
     Flight::render('layout', array('title' => 'TARA About Page'));
 });
 
-Flight::route('/grid', function(){
-    Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('grid', array(), 'body_content');
-    Flight::render('footer', array(), 'footer_content');
-    Flight::render('layout', array('title' => 'TARA Test'));
-});
-
-
-Flight::route('/task', function(){
+Flight::route('/tasks', function(){
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
     Flight::render('tasks', array(), 'body_content');
     Flight::render('footer', array(), 'footer_content');
