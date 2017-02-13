@@ -10,10 +10,10 @@
 
       
       <?php if ($isadmin): ?>
-      <li><a href="/navigation">Room Setup</a></li>
-      <li><a href="/objects">Object Library</a></li>
-      <li><a href="/tasks">Scheduling</a></li>
-      <li><a href="/emergency">Emergency Contact</a></li>
+      <li><a href="<?php echo get_base_url() . '/navigation'; ?>">Room Setup</a></li>
+      <li><a href="<?php echo get_base_url() . '/objects' ; ?>">Object Library</a></li>
+      <li><a href="<?php echo get_base_url() . '/tasks' ; ?>">Scheduling</a></li>
+      <li><a href="<?php echo get_base_url() . '/emergency' ; ?>">Emergency Contact</a></li>
       <?php endif; ?>
         <button type="button" class="btn btn-info btn-small navbar-btn" data-toggle="modal" data-target="#myModal">Immediate Task</button>
          <div class="modal fade" id="myModal" role="dialog">
@@ -48,9 +48,9 @@
       
     <ul class="nav navbar-nav navbar-right">
         <?php if ($isadmin): ?>
-        <li><a href="/logout">Logout</a></li>
+        <li><a href="<?php echo get_base_url() . '/logout'; ?>">Logout</a></li>
         <?php else: ?>
-        <li><a href="/login">Login</a></li>
+        <li><a href="<?php echo get_base_url() . '/login'; ?>">Login</a></li>
         <?php endif; ?>
     </ul>
   </div>
