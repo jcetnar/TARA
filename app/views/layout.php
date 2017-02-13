@@ -28,9 +28,6 @@
     <div class='main-content'>
       <?php echo $body_content; ?>
     </div>
-    <div class='task-bar'>
-        <?php echo $task_bar; ?>
-    </div>
     <footer class='main-footer'>
       <?php echo $footer_content; ?>
     </footer>
