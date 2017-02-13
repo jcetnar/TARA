@@ -22,9 +22,9 @@
     <!--<header class='main-header'>-->
       <?php  echo $header_content; ?>
     <!--</header>-->
-    <?php //if(isset($message_content)): ?>
+    <?php if(isset($message_content)): ?>
         <?php echo $message_content; ?>
-    <?php// endif; ?>
+    <?php endif; ?>
     <div class='main-content'>
       <?php echo $body_content; ?>
     </div>

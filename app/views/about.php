@@ -19,8 +19,6 @@
           <div class="col-md-12 text-center">
             <h1 class="text-inverse">TARA</h1>
             <p class="text-inverse">Task Activated Robot Assistant</p>
-            <br>
-            <br>
           </div>
         </div>
       </div>
@@ -68,14 +66,14 @@
         <div class="row">
           <div class="col-md-3">
             <img src="http://www.studying-in-germany.org/wp-content/uploads/2013/12/Study-Mechanical-Engineering-Germany.jpg"
-            class="img-responsive">
+            class="img-responsive img-rounded">
             <h2>
               <a href="/mechanical">Mechanical</a>
             </h2>
           </div>
           <div class="col-md-3">
             <img src="http://www.esa.int/var/esa/storage/images/esa_multimedia/images/2010/04/electrical_component/9636951-4-eng-GB/Electrical_component.jpg"
-            class="img-responsive">
+            class="img-responsive img-rounded">
             <h2>
               <a href="/electrical">Electrical</a>
             </h2>
@@ -89,24 +87,10 @@
           </div>
           <div class="col-md-3">
             <img src="https://ww2.glance.net/wp-content/uploads/2015/01/glance-for-finance.jpg"
-            class="img-responsive">
+            class="img-responsive img-rounded">
             <h2>
               <a href="/finance">Finance</a>
             </h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div id="fullcarousel-example" data-interval="false" class="carousel slide"
-            data-ride="carousel">
-              <div class="carousel-inner"></div>
-              <a class="left carousel-control" href="#fullcarousel-example" data-slide="prev"><i class="icon-prev fa fa-angle-left"></i></a>
-              <a class="right carousel-control" href="#fullcarousel-example" data-slide="next"><i class="icon-next fa fa-angle-right"></i></a>
-            </div>
           </div>
         </div>
       </div>
