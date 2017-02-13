@@ -26,7 +26,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('GET /login', function(){
-    Flight::render('header', array(), 'header_content');
+    Flight::render('header', array('isadmin' => isadmin()), 'header_content');
     Flight::render('login', array(), 'body_content');
     Flight::render('footer', array(), 'footer_content');
     Flight::render('layout', array('title' => 'TARA Home Page'));
