@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr>
-    <form action='/navigation' method='POST'>
+    <form action='<?php echo get_base_url() . '/navigation'; ?>' method='POST'>
         <td>
             <input type="text" name="array_l" value="length" />
         </td>
@@ -45,7 +45,7 @@
     </thead>
     <tbody>
     <tr>
-    <form action='/navigation' method='POST'>
+    <form action='<?php echo get_base_url() . '/navigation'; ?>' method='POST'>
         <td>
             <input type="text" name="location" value="location" />
         </td>

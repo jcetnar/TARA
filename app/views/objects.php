@@ -12,7 +12,7 @@
     </thead>
     <tbody>
     <tr>
-    <form action='/objects' method='POST'>
+    <form action='<?php echo get_base_url() . '/objects'; ?>' method='POST'>
         <td>
             <input type="text" name="object_name" value="Object" />
         </td>

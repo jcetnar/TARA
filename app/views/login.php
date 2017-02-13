@@ -1,4 +1,4 @@
-<form action='/login' method='post'>
+<form action='<?php echo get_base_url() . '/login'; ?>' method='post'>
   <div class="form-group">
       <div class="row">
       <div class="col-md-4 col-sm-12" >

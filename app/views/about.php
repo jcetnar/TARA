@@ -68,28 +68,28 @@
             <img src="http://www.studying-in-germany.org/wp-content/uploads/2013/12/Study-Mechanical-Engineering-Germany.jpg"
             class="img-responsive img-rounded">
             <h2>
-              <a href="/mechanical">Mechanical</a>
+              <a href="<?php echo get_base_url() . '/mechanical'; ?>">Mechanical</a>
             </h2>
           </div>
           <div class="col-md-3">
             <img src="http://www.esa.int/var/esa/storage/images/esa_multimedia/images/2010/04/electrical_component/9636951-4-eng-GB/Electrical_component.jpg"
             class="img-responsive img-rounded">
             <h2>
-              <a href="/electrical">Electrical</a>
+              <a href="<?php echo get_base_url() . '/electrical'; ?>">Electrical</a>
             </h2>
           </div>
           <div class="col-md-3">
             <img src="http://www.greencaltrain.com/wp-content/uploads/2016/02/wifi.png"
             class="img-responsive img-rounded">
             <h2>
-              <a href="/communication">Communication</a>
+              <a href="<?php echo get_base_url() . '/communication'; ?>">Communication</a>
             </h2>
           </div>
           <div class="col-md-3">
             <img src="https://ww2.glance.net/wp-content/uploads/2015/01/glance-for-finance.jpg"
             class="img-responsive img-rounded">
             <h2>
-              <a href="/finance">Finance</a>
+              <a href="<?php echo get_base_url() . '/finance'; ?>">Finance</a>
             </h2>
           </div>
         </div>
