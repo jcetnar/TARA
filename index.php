@@ -119,9 +119,25 @@ Flight::route('/about', function(){
 
 Flight::route('/tasks', function(){
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('tasks', array(), 'body_content');
+    Flight::render('tasks', array('objects' => get_objects()), 'body_content');
     Flight::render('footer', array(), 'footer_content');
     Flight::render('layout', array('title' => 'TARA Task Page'));
+});
+
+Flight::route('/objects.json', function(){
+    $request = Flight::request();
+    if ($request->method=='POST' && isadmin() && false){
+        $object_name = $request->data['object_name'];
+        $rfid = $request->data['rfid'];
+        $object_type = $request->data['object_type'];
+         if (!empty($object_name) && !empty($rfid) && isset($object_type)){
+            try {
+             insert_object($object_name, $rfid, $object_type);
+            } catch (Exception $e){
+                Flight::render('message', array('message'=> $e->getMessage(),'severity'=>'warning'), 'message_content'); 
+            }
+         }
+    }
 });
 
 Flight::start();

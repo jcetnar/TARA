@@ -10,7 +10,7 @@
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
     rel="stylesheet" type="text/css">
   </head>
-
+  
   <body>
     <div class="cover">
       <div class="cover-image" style="background-image: url(https://unsplash.imgix.net/photo-1418065460487-3e41a6c84dc5?q=25&amp;fm=jpg&amp;s=127f3a3ccf4356b7f79594e05f6c840e);"></div>
@@ -56,7 +56,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center text-primary">Project Components</h1>
+            <h1 class="text-center text-primary">Project Progress</h1>
           </div>
         </div>
       </div>
@@ -64,33 +64,17 @@
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
-            <img src="http://www.studying-in-germany.org/wp-content/uploads/2013/12/Study-Mechanical-Engineering-Germany.jpg"
-            class="img-responsive img-rounded">
-            <h2>
-              <a href="<?php echo get_base_url() . '/mechanical'; ?>">Mechanical</a>
-            </h2>
+          <div class="col-md-6">
+            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
+            class="img-responsive">
           </div>
-          <div class="col-md-3">
-            <img src="http://www.esa.int/var/esa/storage/images/esa_multimedia/images/2010/04/electrical_component/9636951-4-eng-GB/Electrical_component.jpg"
-            class="img-responsive img-rounded">
-            <h2>
-              <a href="<?php echo get_base_url() . '/electrical'; ?>">Electrical</a>
-            </h2>
-          </div>
-          <div class="col-md-3">
-            <img src="http://www.greencaltrain.com/wp-content/uploads/2016/02/wifi.png"
-            class="img-responsive img-rounded">
-            <h2>
-              <a href="<?php echo get_base_url() . '/communication'; ?>">Communication</a>
-            </h2>
-          </div>
-          <div class="col-md-3">
-            <img src="https://ww2.glance.net/wp-content/uploads/2015/01/glance-for-finance.jpg"
-            class="img-responsive img-rounded">
-            <h2>
-              <a href="<?php echo get_base_url() . '/finance'; ?>">Finance</a>
-            </h2>
+          <div class="col-md-6">
+            <h1>Current Goals</h1>
+            <h3></h3>
+            <ol>
+              <li>Develop subsystems&nbsp;</li>
+              <li>Begin integration between subsystems</li>
+            </ol>
           </div>
         </div>
       </div>

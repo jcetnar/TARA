@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -6,13 +7,10 @@
     <ul class="nav navbar-nav">
       <li><a href="<?php echo get_base_url() . '/about'; ?>">About</a></li>
       
-     
-
-      
       <?php if ($isadmin): ?>
       <li><a href="<?php echo get_base_url() . '/navigation'; ?>">Room Setup</a></li>
       <li><a href="<?php echo get_base_url() . '/objects' ; ?>">Object Library</a></li>
-      <li><a href="<?php echo get_base_url() . '/tasks' ; ?>">Scheduling</a></li>
+      <li><a href="<?php echo get_base_url() . '/tasks' ; ?>">Scheduled Tasks</a></li>
       <li><a href="<?php echo get_base_url() . '/emergency' ; ?>">Emergency Contact</a></li>
       <?php endif; ?>
         <button type="button" class="btn btn-info btn-small navbar-btn" data-toggle="modal" data-target="#myModal">Immediate Task</button>
