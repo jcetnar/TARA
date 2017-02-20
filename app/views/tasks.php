@@ -11,7 +11,7 @@
       <label for="date">Date:</label>
       <input type="text" class="form-control" id="date" placeholder="Enter Date">
     </div>
-    <ul class="form-group objects_list">
+    <ul class="list-unstyled form-group objects_list">
         <?php foreach ($objects as $object): ?>
         <li>
             <label><input type="checkbox" class="object" value="<?php echo $object['rfid']; ?>">
@@ -21,9 +21,9 @@
         <?php endforeach; ?>
     </ul>
     <div class="checkbox">
-      <label><input type="checkbox"> Repeat Weekly</label>
+      <label><input type="checkbox" id="repeat"> Repeat Weekly</label>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="button" class="btn btn-default object-submit">Submit</button>
   </form>
 </div>
 
@@ -31,3 +31,4 @@
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
 <script type="text/javascript" src="/app/js/task_grid.js"></script>
+<script type="text/javascript" src="/app/js/task_form.js"></script>

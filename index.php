@@ -124,6 +124,24 @@ Flight::route('/tasks', function(){
     Flight::render('layout', array('title' => 'TARA Task Page'));
 });
 
+Flight::route('GET /tasks.json', function() {
+});
+
+Flight::route('POST /tasks.json', function() {
+    if (isadmin()) {
+        $request = Flight::request();
+        if ($request->data->operation === 'insert') {
+            $id = add_task($request->data->name, $request->data->date, $request->data->repeat);
+            $res = link_objects($id, $request->data->objects);
+            Flight::json(array('id'=>$id));
+        }
+        elseif ($request->data->operation === 'delete') {
+            $task_id = $request->data->id;
+            Flight::json(array('deleted' => true));
+        }
+    }
+});
+
 Flight::route('/objects.json', function(){
     $request = Flight::request();
     if ($request->method=='POST' && isadmin() && false){
@@ -141,4 +159,3 @@ Flight::route('/objects.json', function(){
 });
 
 Flight::start();
-?>

@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/dbconfig.php';
 
+date_default_timezone_set('America/New_York');
+
 function checkadmin($username, $password){
     $pdo = get_pdo();
     $stmt = $pdo->prepare('SELECT isadmin FROM users WHERE username=:username AND password=:password LIMIT 1');
@@ -53,4 +55,34 @@ function get_navigation(){
     
     $results = $stmt->fetchAll();
     return $results;
+}
+
+function add_task($name, $date, $repeat){
+    // Ugly and bad. Breaks on changes to capitalization of string.
+    // Here to avoid complaints about $repeat being a string.
+    $repeat = ($repeat === 'true') ? 1 : 0;
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('INSERT INTO tasks (`name`, `date`, `repeat_weekly`) VALUES (:name, :date, :repeat_weekly)');
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':date', date("Y-m-d H:i:s", strtotime($date)), PDO::PARAM_STR);
+    // I have no idea why *this* needs to be an INT but the other can be a BOOL.
+    // However MySQL has decided to not run queries any other way so sod it.
+    $stmt->bindParam(':repeat_weekly', $repeat, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $pdo->lastInsertId(); 
+}
+
+function link_objects($id, $objects) {
+    $pdo = get_pdo();
+    $res = TRUE;
+    foreach ($objects as $object) {
+        var_dump($object);
+        $object_id = $object;
+        $stmt = $pdo->prepare('INSERT INTO tasks_objects (`task_id`, `object_id`) VALUES (:task_id, :object_id)');
+        $stmt->bindParam(':task_id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':object_id', $object_id, PDO::PARAM_STR);
+        $res = $stmt->execute();
+    }
+    return $res;
 }
