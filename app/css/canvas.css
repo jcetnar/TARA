@@ -1,0 +1,28 @@
+.objects-menu, .barcode-prompt {
+  display: none;
+  z-index: 1000;
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  white-space: nowrap;
+  font-family: sans-serif;
+  background: #fff;
+  color: #333;
+  border-radius: 5px;
+  padding: 0;
+}
+
+.barcode-prompt {
+  padding: 10px;
+}
+
+.objects-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+  list-style-type: none;
+  transition: all .3s ease;
+}
+
+.objects-menu li:hover {
+  background-color: #def;
+}

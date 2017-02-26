@@ -23,6 +23,7 @@
         </div>
       </div>
     </div>
+    <p> In many cases, a person may be in need of assistance to manage tasks in their daily life and/or may be unable to gather the specific items needed for these tasks. This project, therefore, will use a robot with an app interface to not only set reminders for these tasks but also to bring the necessary items to the User. </p>
     <div class="section">
       <div class="container">
         <div class="row">

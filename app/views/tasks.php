@@ -1,7 +1,7 @@
 <div class="task_form">
-  <p>Create a New Task
+  <h1>Create a New Task
       <!-- Make the viewport larger than 768px wide to see that all of the form elements are inline, left aligned, and the labels are alongside.
-      --></p>
+      --></h1>
   <form class="form-inline">
     <div class="form-group">
       <label for="task_name">Name:</label>
@@ -27,8 +27,10 @@
   </form>
 </div>
 
+<!--
 <div id="task-grid"></div>
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
 <script type="text/javascript" src="/app/js/task_grid.js"></script>
+-->
 <script type="text/javascript" src="/app/js/task_form.js"></script>

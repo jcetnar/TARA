@@ -25,6 +25,25 @@ Flight::route('/', function(){
     Flight::render('layout', array('title' => 'TARA Home Page'));
 });
 
+
+Flight::route('/canvas', function(){    
+    $request = Flight::request();
+    if ($request->method=='POST' && isadmin()){
+        $navigation_grid = $request->data['navigation_grid'];
+         if (!empty($navigation_grid)){
+            try {
+             save_nav_grid($navigation_grid);
+            } catch (Exception $e){
+                Flight::render('message', array('message'=> $e->getMessage(),'severity'=>'warning'), 'message_content'); 
+            }
+         }
+    }
+    Flight::render('header', array('isadmin' => isadmin()), 'header_content');
+    Flight::render('canvas', array('objects' => get_stationary_objects()), 'body_content');
+    Flight::render('layout', array('title' => 'TARA Objects Page'));
+});
+
+
 Flight::route('GET /login', function(){
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
     Flight::render('login', array(), 'body_content');
@@ -104,6 +123,19 @@ Flight::route('/navigation', function(){
 });
 
 Flight::route('/emergency', function(){
+$request = Flight::request();
+    if ($request->method=='POST' && isadmin()){
+        $name = $request->data['name'];
+        $email = $request->data['email'];
+        $phone = $request->data['phone'];
+         if (!empty($name) && !empty($email) && !empty($phone)){
+            try {
+             insert_contact($name, $email, $phone);
+            } catch (Exception $e){
+                Flight::render('message', array('message'=> $e->getMessage(),'severity'=>'warning'), 'message_content'); 
+            }
+         }
+    }
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
     Flight::render('emergency', array(), 'body_content');
     Flight::render('footer', array(), 'footer_content');
@@ -120,7 +152,8 @@ Flight::route('/about', function(){
 Flight::route('/tasks', function(){
     Flight::render('header', array('isadmin' => isadmin()), 'header_content');
     Flight::render('tasks', array('objects' => get_objects()), 'body_content');
-    Flight::render('footer', array(), 'footer_content');
+    Flight::render('tasks_view', array('tasks' => get_task()), 'footer_content');
+   //  Flight::render('footer', array(), 'footer_content');
     Flight::render('layout', array('title' => 'TARA Task Page'));
 });
 

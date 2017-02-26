@@ -1,44 +1,47 @@
-<html>
-  <body>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <form class="form-horizontal" role="form">
-              <div class="form-group">
-                <div class="col-sm-2">
-                  <label for="inputEmail3" class="control-label">Email</label>
-                </div>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputEmail3" placeholder="Name">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-2">
-                  <label for="inputPassword3" class="control-label">Password</label>
-                </div>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputPassword3" placeholder="Email">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox">Remember me</label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-default">Sign in</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
 
-</html>
+<div class="container">
+  <h2>Emergency Contact</h2>         
+ <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+        <form action='<?php echo get_base_url() . '/emergency'; ?>' method='POST'>
+            <td>
+                <input type="varchar" name="name" value="name" />
+            </td>
+            <td>
+                <input type="varchar" name="email" value="email" />
+            </td>
+            <td>
+                <input type="varchar" name="phone" value="phone" />
+            </td>
+            <td>
+            <button type="submit" class="btn btn-default">Submit</button>
+            </td>
+        </form>
+    <?php foreach ($contacts as $contact): ?>
+        <tr>
+            <td>
+                <?php echo $name['name']; ?>
+            </td>
+            <td>
+                <?php echo $email['email']; ?>
+            </td>
+            <td>
+                <?php echo $phone['phone']; ?>
+            </td>
+            <td>
+                <button class="btn btn-sm">Delete</button>
+            </td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+</div>
+
+

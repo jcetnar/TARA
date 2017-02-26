@@ -30,13 +30,13 @@ function insert_object($object_name, $rfid, $object_type){
     return $stmt->execute();
 }
 
-function get_objects(){
+function insert_contact($name, $email, $phone){
     $pdo = get_pdo();
-    $stmt = $pdo->prepare('SELECT * FROM objects LIMIT 20');
-    $stmt->execute();
-    
-    $results = $stmt->fetchAll();
-    return $results;
+    $stmt = $pdo->prepare('INSERT INTO contact (name, email, phone) VALUES (:name, :email, :phone)');
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+    return $stmt->execute();
 }
 
 function insert_navigation($array_l, $array_w, $location){
@@ -48,13 +48,9 @@ function insert_navigation($array_l, $array_w, $location){
     return $stmt->execute();
 }
 
-function get_navigation(){
-    $pdo = get_pdo();
-    $stmt = $pdo->prepare('SELECT * FROM navigation LIMIT 200');
-    $stmt->execute();
-    
-    $results = $stmt->fetchAll();
-    return $results;
+function save_nav_grid($navigation_grid){
+    file_put_contents('navigation_grid', serialize($navigation_grid));
+    return true;
 }
 
 function add_task($name, $date, $repeat){
@@ -73,6 +69,43 @@ function add_task($name, $date, $repeat){
     return $pdo->lastInsertId(); 
 }
 
+
+function get_objects(){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('SELECT * FROM objects LIMIT 20');
+    $stmt->execute();
+    
+    $results = $stmt->fetchAll();
+    return $results;
+}
+
+function get_navigation(){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('SELECT * FROM navigation LIMIT 200');
+    $stmt->execute();
+    
+    $results = $stmt->fetchAll();
+    return $results;
+}
+
+function get_task(){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('SELECT name, date, repeat_weekly FROM tasks');
+    $stmt->execute();
+    
+    $results = $stmt->fetchAll();
+    return $results;
+}
+
+function get_contact(){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('SELECT name, email, phone FROM contact');
+    $stmt->execute();
+    
+    $results = $stmt->fetchAll();
+    return $results;  
+}
+
 function link_objects($id, $objects) {
     $pdo = get_pdo();
     $res = TRUE;
@@ -85,4 +118,13 @@ function link_objects($id, $objects) {
         $res = $stmt->execute();
     }
     return $res;
+}
+
+function get_stationary_objects(){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('SELECT * FROM objects WHERE type = 1 LIMIT 20');
+    $stmt->execute();
+    
+    $results = $stmt->fetchAll();
+    return $results;
 }
