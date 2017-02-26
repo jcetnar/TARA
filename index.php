@@ -26,7 +26,7 @@ Flight::route('/', function(){
 });
 
 
-Flight::route('/canvas', function(){    
+Flight::route('/navigation', function(){    
     $request = Flight::request();
     if ($request->method=='POST' && isadmin()){
         $navigation_grid = $request->data['navigation_grid'];
@@ -80,27 +80,33 @@ Flight::route('POST /login', function(){
 Flight::route('/objects', function(){
     $request = Flight::request();
     if ($request->method=='POST' && isadmin()){
+        $object_method = $request->data['object_method'];
         $object_name = $request->data['object_name'];
         $rfid = $request->data['rfid'];
         $object_type = $request->data['object_type'];
-         if (!empty($object_name) && !empty($rfid) && isset($object_type)){
+        if ((!empty($object_name) && isset($object_type) && !empty($rfid)) || (!empty($rfid) && !empty($object_method))){
             try {
-             insert_object($object_name, $rfid, $object_type);
+                if ($object_method == 'delete'){
+                    object_delete($rfid);
+                }   
+                else {
+                    insert_object($object_name, $rfid, $object_type);
+                }
             } catch (Exception $e){
                 Flight::render('message', array('message'=> $e->getMessage(),'severity'=>'warning'), 'message_content'); 
             }
-         }
+        }
     }
-    
-    
-    Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-    Flight::render('objects', array('objects' => get_objects()), 'body_content');
-    Flight::render('footer', array(), 'footer_content');
-    Flight::render('layout', array('title' => 'TARA Objects Page'));
+    else {
+        Flight::render('header', array('isadmin' => isadmin()), 'header_content');
+        Flight::render('objects', array('objects' => get_objects()), 'body_content');
+        Flight::render('footer', array(), 'footer_content');
+        Flight::render('layout', array('title' => 'TARA Objects Page'));
+    }
 });
 
 
-Flight::route('/navigation', function(){
+Flight::route('/navigationOLD', function(){
     $request = Flight::request();
     if ($request->method=='POST' && isadmin()){
         $array_l = $request->data['array_l'];
@@ -174,7 +180,7 @@ Flight::route('POST /tasks.json', function() {
         }
     }
 });
-
+/*
 Flight::route('/objects.json', function(){
     $request = Flight::request();
     if ($request->method=='POST' && isadmin() && false){
@@ -190,5 +196,6 @@ Flight::route('/objects.json', function(){
          }
     }
 });
+ */
 
 Flight::start();

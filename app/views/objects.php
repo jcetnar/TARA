@@ -1,3 +1,4 @@
+<script type='text/javascript' src='app/js/objects.js'></script>
 
 <div class="container">
   <h2>Objects</h2>         
@@ -32,13 +33,13 @@
     </tr>
       <?php foreach ($objects as $object): ?>
         <tr>
-            <td>
+            <td class="object-name">
                 <?php echo $object['name']; ?>
             </td>
-            <td>
+            <td class="object-rfid">
                 <?php echo $object['rfid']; ?>
             </td>
-            <td>
+            <td class="object-type">
                 <?php if ($object['type'] === 0): ?>
                     Mobile
                 <?php else: ?>
@@ -46,7 +47,7 @@
                 <?php endif; ?>
             </td>
             <td>
-                <button class="btn btn-sm">Delete</button>
+                <button class = "button-object-delete btn btn-sm">Delete</button>
             </td>
         </tr>
       <?php endforeach; ?>

@@ -49,7 +49,7 @@ function insert_navigation($array_l, $array_w, $location){
 }
 
 function save_nav_grid($navigation_grid){
-    file_put_contents('navigation_grid', serialize($navigation_grid));
+    file_put_contents('./app/data/navigation_grid', serialize($navigation_grid));
     return true;
 }
 
@@ -127,4 +127,11 @@ function get_stationary_objects(){
     
     $results = $stmt->fetchAll();
     return $results;
+}
+
+function object_delete($rfid){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('delete FROM objects WHERE rfid=:rfid');
+    $stmt->bindParam(':rfid', trim($rfid), PDO::PARAM_STR);
+    return $stmt->execute();
 }

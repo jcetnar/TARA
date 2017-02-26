@@ -1,4 +1,5 @@
 (function($) {
+  var baseURL = document.URL.substring(0, document.URL.lastIndexOf("/"));
   $(document).ready(function() {
     // Get the upper left corner of the cell that was clicked on.
     function getSquare(canvas, evnt, cellSize) {
@@ -176,7 +177,23 @@
     });
 
     $('.submit-button').click(function() {
-      console.log(dataGrid);
+        $.ajax({
+            url: baseURL + '/navigation',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                navigation_grid: dataGrid,
+            },
+            success: function(data) {
+               console.log(data);
+            },
+            error: function(xhr, status, error) {
+               console.log(status);
+               console.log(error);
+               console.log('dammnit');
+            }   
+        });
+        //console.log(dataGrid);
     });
   });
 })(jQuery);
