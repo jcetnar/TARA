@@ -34,5 +34,29 @@
                }   
             });
         });
+        //below here was just added, may break everyting
+              $('.button-object-delete').click(function() {
+          var id= $(this).parent().siblings('.id').text();
+          console.log(id);
+          //console.log($(this).parent().siblings('.object-rfid').text());
+        $.ajax({
+                url: baseURL + '/tasks',
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    object_method: 'delete',
+                    id: id
+                },
+            success: function(data) {
+                console.log(data);
+                 },
+            error: function(xhr, status, error) {
+                console.log(status);
+                console.log(error);
+                console.log('dammnit');
+                }   
+            });
+      });
+      //above here was the new stuff
     });
 })(jQuery);
