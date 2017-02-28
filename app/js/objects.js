@@ -1,29 +1,28 @@
 (function($) {
   var baseURL = document.URL.substring(0, document.URL.lastIndexOf("/"));
-  $(document).ready(function() {    
-      $('.button-object-delete').click(function() {
-          var rfid= $(this).parent().siblings('.object-rfid').text();
-          console.log(rfid);
-          //console.log($(this).parent().siblings('.object-rfid').text());
-        $.ajax({
-                url: baseURL + '/objects',
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    object_method: 'delete',
-                    rfid: rfid
-                },
-            success: function(data) {
-                console.log(data);
-                 },
-            error: function(xhr, status, error) {
-                console.log(status);
-                console.log(error);
-                console.log('dammnit');
-                }   
-            });
+  $(document).ready(function() {
+    $('.button-object-delete').click(objectDeleteHandler);
+    function objectDeleteHandler() {
+      var rfid= $(this).parent().siblings('.object-rfid').text();
+      console.log(rfid);
+      $.ajax({
+        url: baseURL + '/objects',
+        method: 'POST',
+        dataType: 'html',
+        data: {
+          object_method: 'delete',
+          rfid: rfid
+        },
+        success: function(data) {
+          $('.object').remove();
+          $('.object-form').after($('.object', data));
+          $('.button-object-delete').click(objectDeleteHandler);
+        },
+        error: function(xhr, status, error) {
+          console.log(status);
+          console.log(error);
+        }
       });
- });
-  
-  
+    }
+  });
 })(jQuery);

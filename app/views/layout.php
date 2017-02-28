@@ -3,33 +3,47 @@
 <head>
   <title><?php echo $title; ?></title>
   <meta charset='UTF-8'> 
-     <!-- for scaling on phone -->
- 	<meta name='viewport' content='width=device-width, initial-scale=10'> 
-     <!-- bring css style sheet -->
- <!--  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
-
- <link rel='stylesheet' href='app/css/default_layout.css'>
- -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+  <!-- Set viewport for proper scaling on mobile -->
+ 	<meta name='viewport' content='width=device-width, initial-scale=10'>
+  <!-- General Stylesheets -->
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <!-- Page Specific Stylesheets -->
+  <?php if (isset($css) && is_array($css)): ?>
+    <?php foreach ($css as $sheet): ?>
+      <link rel='stylesheet' href='<?php echo $sheet; ?>'>
+    <?php endforeach; ?>
+  <?php endif; ?>
+  <!-- General JS Libraries -->
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+  <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <!-- Page Specific JS -->
+  <?php if (isset($js) && is_array($js)): ?>
+    <?php foreach ($js as $lib): ?>
+      <script type='text/javascript' src='<?php echo $lib; ?>'></script>
+    <?php endforeach; ?>
+  <?php endif; ?>
 </head>
 <body>
   <div class='container'>
-    <!--<header class='main-header'>-->
-      <?php  echo $header_content; ?>
-    <!--</header>-->
-    <?php if(isset($message_content)): ?>
+    <header class='main-header'>
+      <?php if (isset($header_content)): ?>
+        <?php  echo $header_content; ?>
+      <?php endif; ?>
+    </header>
+    <div class='message-content'>
+      <?php if(isset($message_content)): ?>
         <?php echo $message_content; ?>
-    <?php endif; ?>
+      <?php endif; ?>
+    </div>
     <div class='main-content'>
-      <?php echo $body_content; ?>
+      <?php if (isset($body_content)): ?>
+        <?php echo $body_content; ?>
+      <?php endif; ?>
     </div>
     <footer class='main-footer'>
-      <?php echo $footer_content; ?>
+      <?php if (isset($footer_content)): ?>
+        <?php echo $footer_content; ?>
+      <?php endif; ?>
     </footer>
   </div>
 </body>
