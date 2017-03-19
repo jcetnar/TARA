@@ -37,7 +37,7 @@
           <?php echo $object['rfid']; ?>
         </td>
         <td class="object-type">
-          <?php if ($object['type'] === 0): ?>
+          <?php if ($object['type'] == 0): ?>
             Mobile
           <?php else: ?>
             Stationary
