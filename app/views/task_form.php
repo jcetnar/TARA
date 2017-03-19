@@ -14,7 +14,7 @@
     <ul class="list-unstyled form-group objects_list">
       <?php foreach ($objects as $object): ?>
         <li>
-          <label><input type="checkbox" class="object" value="<?php echo $object['rfid']; ?>">
+          <label><input type="checkbox" class="object" value="<?php echo $object['id']; ?>">
             <?php echo $object['name']; ?>
           </label>
         </li>
