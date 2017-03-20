@@ -76,7 +76,7 @@ function get_task(){
   $results = $stmt->fetchAll();
   for ($i = 0; $i < count($results); $i++) {
     $id = $results[$i]['id'];
-    $stmt = $pdo->prepare('SELECT objects.name AS name FROM tasks_objects INNER JOIN objects ON tasks_objects.object_id=objects.rfid WHERE tasks_objects.task_id=:id');
+    $stmt = $pdo->prepare('SELECT objects.name AS name FROM tasks_objects INNER JOIN objects ON tasks_objects.object_id=objects.id WHERE tasks_objects.task_id=:id');
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $objs = $stmt->fetchAll();
