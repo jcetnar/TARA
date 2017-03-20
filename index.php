@@ -232,7 +232,7 @@ Flight::route('/tasks', function(){
     array(
       'title' => 'TARA Task Page',
       'js' => array(
-        '/app/js/task_form.js'
+        'app/js/task_form.js'
       )
     )
   );
