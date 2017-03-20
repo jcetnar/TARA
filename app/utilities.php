@@ -80,7 +80,9 @@ function get_task(){
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $objs = $stmt->fetchAll();
-    $results[$i]['task_objects'] = array_column($objs, 'name');
+    foreach ($objs as $obj) {
+      $results[$i]['task_objects'][] = $obj['name'];
+    }
   }
   return $results;
 }
