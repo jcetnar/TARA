@@ -3,7 +3,7 @@
   <thead>
     <tr>
       <th>Object Name</th>
-      <th>RFID</th>
+      <th>Shelf ID</th> <!-- formerly RFID --> 
       <th>Object Type</th>
       <th>Action</th>
     </tr>

@@ -3,7 +3,7 @@
 <ul class='objects-menu'>
   <li data-id="barcode">Barcode</li>
   <?php foreach ($objects as $object): ?>
-    <li data-id="<?php echo $object['rfid']; ?>">
+    <li data-type="object" data-id="<?php echo $object['name']; ?>">
       <?php echo $object['name']; ?>
     </li>
   <?php endforeach; ?> 

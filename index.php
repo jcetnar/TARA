@@ -257,4 +257,72 @@ Flight::route('POST /tasks.json', function() {
   }
 });
 
+Flight::route('/cabinets', function(){
+  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
+  Flight::render('cabinet_form', array(), 'task_form_content');
+  Flight::render('cabinet_list', array('cabinet' => get_cabinet()), 'task_list_content');
+  Flight::render('cabinets',array(), 'body_content');
+  // Flight::render('footer', array(), 'footer_content');
+  Flight::render(
+    'layout',
+    array(
+      'title' => 'TARA Cabinet Page',
+      'js' => array(
+        'app/js/cabinet_form.js'
+      )
+    )
+  );
+});
+
+/**
+ * jlkj
+ * lkjkl
+ */
+Flight::route('POST /cabinets.json', function() {
+  if (isadmin()) {
+    $request = Flight::request();
+    if ($request->data->operation === 'insert') {
+      $id = add_task($request->data->name, $request->data->date, $request->data->repeat);
+      $res = link_objects($id, $request->data->objects);
+      Flight::json(array('id'=>$id));
+    }
+    else if ($request->data->operation === 'delete') {
+      $task_id = $request->data->id;
+      Flight::json(array('deleted' => task_delete($task_id)));
+    }
+  }
+});
+
+//testing
+Flight::route('/cab', function() {
+  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
+  Flight::render('cabinet_form', array(), 'body_content');
+  Flight::render('footer', array(), 'footer_content');
+  Flight::render('layout', array('title' => 'TARA Home Page'));
+});
+
+
+// for Grace, use GET to cobweb ~jcetnar/task_list.json
+Flight::route('/task_list.json', function() {
+   //array in PHP is a hash map -> key, value, store
+    $tasks = array(
+        array(
+          //keys are numbers or strings mosttimes
+            'name'=>'Get Pills',
+            'date'=>'05/29/2017 19:00:00',
+            'objects'=> array(
+                array(
+                    'name'=>'Pills',
+                    //location is the shelf RFID
+                    'location'=> '001023',
+                    //object_id is auto-generated when the object is entered
+                    'object_id'=> '1',
+                ),
+            ),
+            'repeat'=> 1,
+        ),
+    );
+    Flight::json($tasks);
+});
+
 Flight::start();

@@ -1,4 +1,4 @@
-
+<!--
 <div class="container">
   <h2>Scheduled Tasks</h2>         
   <table class="table table-hover">
@@ -40,3 +40,4 @@
     </tbody>
   </table>
 </div>
+-->
