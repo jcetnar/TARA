@@ -1,0 +1,5 @@
+- Immediate tasks push to db
+- endpoints for task (date/time, location of objects involved (cabinet name and shelf id)
+- endpoint for navigation grid (stationary objects, cabinet name, wall, barcode) 
+- update db to reflect cabinet system
+- make cabinet page push to db
