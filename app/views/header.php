@@ -4,7 +4,7 @@
       <a class="navbar-brand" href="<?php echo get_base_url() . '/'; ?>">TARA</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="<?php echo get_base_url() . '/about'; ?>">About</a></li>
+<!--      <li><a href="<?php echo get_base_url() . '/about'; ?>">About</a></li> --> 
       <?php if ($isadmin): ?>
         <li><a href="<?php echo get_base_url() . '/navigation'; ?>">Room Setup</a></li>
         <li><a href="<?php echo get_base_url() . '/cabinets' ; ?>">Shelf Setup</a></li>

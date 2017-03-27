@@ -3,15 +3,17 @@
   $(document).ready(function() {
     $('.button-object-delete').click(objectDeleteHandler);
     function objectDeleteHandler() {
-      var rfid= $(this).parent().siblings('.object-rfid').text();
-      console.log(rfid);
+      //var rfid= $(this).parent().siblings('.object-rfid').text();
+      var id= $(this).parent().siblings('.object-id').text();
+      console.log(id);
+      //console.log(rfid);
       $.ajax({
         url: baseURL + '/objects',
         method: 'POST',
         dataType: 'html',
         data: {
           object_method: 'delete',
-          rfid: rfid
+          id: id
         },
         success: function(data) {
           $('.object').remove();

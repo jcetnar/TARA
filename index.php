@@ -21,21 +21,22 @@ Flight::route('/', function() {
 /**
  *
  */
-Flight::route('/about', function(){
-  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-  Flight::render('about', array(), 'body_content');
-  Flight::render('footer', array(), 'footer_content');
-  Flight::render(
-    'layout',
-    array(
-      'title' => 'TARA About Page',
-      'css' => array(
-        'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css',
-        'http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css',
-      ),
-    )
-  );
-});
+
+//Flight::route('/about', function(){
+//  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
+//  Flight::render('about', array(), 'body_content');
+//  Flight::render('footer', array(), 'footer_content');
+//  Flight::render(
+//    'layout',
+//    array(
+//      'title' => 'TARA About Page',
+//      'css' => array(
+//        'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css',
+//        'http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css',
+//      ),
+//    )
+//  );
+//});
 
 /**
  *
@@ -179,18 +180,21 @@ Flight::route('/objects', function(){
   if ($request->method == 'POST' && isadmin()){
     $object_method = $request->data['object_method'];
     $object_name = $request->data['object_name'];
-    $rfid = $request->data['rfid'];
+    $id = $request->data['id'];//formerly rfid
     $object_type = $request->data['object_type'];
-    if ((!empty($object_name) && isset($object_type) && !empty($rfid)) || (!empty($rfid) && !empty($object_method))){
+    $object_location = $request->data['object_location'];
+   //need to edit if conditions
+    //if ((!empty($object_name) && isset($object_type) && !empty($id)) || (!empty($id) && !empty($object_method))){
+    if (!empty($object_name) && isset($object_type)){
       error_log('1');
       try {
         if ($object_method == 'delete'){
           error_log('2');
-          $res = object_delete($rfid);
+          $res = object_delete($id); //formerly rfid
           error_log($res);
         }
         else {
-          insert_object($object_name, $rfid, $object_type);
+          insert_object($object_name, $object_type, $object_location);
         }
       } catch (Exception $e){
         Flight::render(

@@ -3,8 +3,8 @@
   <thead>
     <tr>
       <th>Object Name</th>
-      <th>Shelf ID</th> <!-- formerly RFID --> 
       <th>Object Type</th>
+      <th>Shelf ID <br> if mobile object, enter shelf RFID. if stationary, leave blank </br> </th> <!-- formerly RFID --> 
       <th>Action</th>
     </tr>
   </thead>
@@ -12,16 +12,17 @@
     <tr class="object-form">
       <form action='<?php echo get_base_url() . '/objects'; ?>' method='POST'>
         <td>
-          <input type="text" name="object_name" value="Object" />
+          <input type="text" name="object_name" placeholder="Pills" />
         </td>
-        <td>
-          <input type="text" name="rfid" value="RFID" />
-        </td>
-        <td>
+         <td>
           <select name="object_type">
             <option value='0'>Mobile</option>
             <option value='1'>Stationary</option>
           </select>
+        </td>
+        <!-- here goes a dropdown of all available shelf RFIDs or NULL for stationary objects -->
+        <td>
+          <input type="text" name="object_location" placeholder="000901" />
         </td>
         <td>
           <button type="submit" class="btn btn-default">Submit</button>
@@ -33,15 +34,15 @@
         <td class="object-name">
           <?php echo $object['name']; ?>
         </td>
-        <td class="object-rfid">
-          <?php echo $object['rfid']; ?>
-        </td>
         <td class="object-type">
           <?php if ($object['type'] == 0): ?>
             Mobile
           <?php else: ?>
             Stationary
           <?php endif; ?>
+        </td>
+        <td class="object-location">
+          <?php echo $object['location']; ?>
         </td>
         <td>
           <button class = "button-object-delete btn btn-sm">Delete</button>

@@ -24,12 +24,13 @@ function isadmin(){
 }
 
 //throws exception on sql error, caught in index.php
-function insert_object($object_name, $rfid, $object_type){
+function insert_object($object_name, $object_type, $object_location){
   $pdo = get_pdo();
-  $stmt = $pdo->prepare('INSERT INTO objects (name, type, rfid) VALUES (:name, :type, :rfid)');
+  $stmt = $pdo->prepare('INSERT INTO objects (name, type, location) VALUES (:name, :type, :location)');
   $stmt->bindParam(':name', $object_name, PDO::PARAM_STR);
   $stmt->bindParam(':type', $object_type, PDO::PARAM_BOOL);
-  $stmt->bindParam(':rfid', $rfid, PDO::PARAM_STR);
+  //$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+  $stmt->bindParam(':location', $object_location, PDO::PARAM_STR);
   return $stmt->execute();
 }
 
@@ -124,10 +125,10 @@ function get_stationary_objects(){
   return $results;
 }
 
-function object_delete($rfid){
+function object_delete($id){
   $pdo = get_pdo();
-  $rfid = trim($rfid);
-  $stmt = $pdo->prepare('DELETE FROM objects WHERE rfid=:rfid');
-  $stmt->bindParam(':rfid', $rfid, PDO::PARAM_INT);
+  $id = trim($id);
+  $stmt = $pdo->prepare('DELETE FROM objects WHERE id=:id');
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
   return $stmt->execute();
 }
