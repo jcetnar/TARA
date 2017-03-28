@@ -8,9 +8,18 @@
       <input type="text" class="form-control" id="task_name" placeholder="Enter Name">
     </div>
     <div class="form-group">
-      <label for="date">Date:</label>
-      <input type="datetime" class="form-control" id="date" placeholder="Enter Date">
+      <label for="start_date">Start Date:</label>
+      <input type="datetime" class="form-control" id="start_date" placeholder="Enter Start Date">
     </div>
+    <div class="form-group">
+      <label for="end_date">End Date:</label>
+      <input type="datetime" class="form-control" id="end_date" placeholder="Enter End Date">
+    </div>
+<!--      Starting messy logic....-->
+    <div class="checkbox">
+      <label><input type="checkbox" id="task_type"> Task Type (0 Bring Objects: 1 Guide to)</label>
+    </div>
+<!--    if task_type == 1, show stationary objects-->
     <ul class="list-unstyled form-group objects_list">
       <?php foreach ($objects as $object): ?>
         <li>

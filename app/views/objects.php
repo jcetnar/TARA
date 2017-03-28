@@ -1,10 +1,11 @@
+Original Objects Form 
 <h2>Objects</h2>
 <table class="table table-hover">
   <thead>
     <tr>
       <th>Object Name</th>
       <th>Object Type</th>
-      <th>Shelf ID <br> if mobile object, enter shelf RFID. if stationary, leave blank </br> </th> <!-- formerly RFID --> 
+      <th>Shelf ID <br> if mobile object, enter shelf RFID. if stationary, enter location barcode </br> </th> <!-- formerly RFID --> 
       <th>Action</th>
     </tr>
   </thead>
@@ -20,7 +21,7 @@
             <option value='1'>Stationary</option>
           </select>
         </td>
-        <!-- here goes a dropdown of all available shelf RFIDs or NULL for stationary objects -->
+        <!-- Location is either tray RFIDs or location barcode for stationary objects -->
         <td>
           <input type="text" name="object_location" placeholder="000901" />
         </td>

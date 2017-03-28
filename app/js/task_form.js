@@ -21,7 +21,9 @@
 
     $('.object-submit').click(function() {
       var name = $('#task_name').val();
-      var date = $('#date').val();
+      var start_date = $('#start_date').val();
+      var end_date = $('#end_date').val();
+      var task_type = $('#task_type').is(':checked');
       var repeat = $('#repeat').is(':checked');
       var objects = [];
       $('.object').each(function() {
@@ -32,7 +34,9 @@
       form_data = {
         "operation": "insert",
         "name": name,
-        "date": date,
+        "start_date": start_date,
+        "end_date": end_date,
+        "task_type": task_type,
         "repeat": repeat,
         "objects[]": objects
       };

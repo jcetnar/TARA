@@ -3,7 +3,9 @@
   <thead>
     <tr>
       <th>Task Name</th>
-      <th>Date</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Task Type</th>
       <th>Objects</th>
       <th>Repeat</th>
       <th>Remove </th>
@@ -16,7 +18,18 @@
           <?php echo $task['name']; ?>
         </td>
         <td>
-          <?php echo $task['date']; ?>
+          <?php echo $task['start_date']; ?>
+        </td>
+        <td>
+          <?php echo $task['end_date']; ?>
+        </td>
+        </td>
+        <td>
+          <?php if ($task['task_type'] === 1): ?>
+            Guide User to Object
+          <?php else: ?>
+            Bring Object to User
+          <?php endif; ?>
         </td>
         <td>
           <?php if (isset($task['task_objects'])): ?>

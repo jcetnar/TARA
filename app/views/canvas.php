@@ -2,11 +2,11 @@
 <button type='button' class='submit-button'>Done</button>
 <ul class='objects-menu'>
   <li data-id="barcode">Barcode</li>
-  <?php foreach ($objects as $object): ?>
+<!--  <?php foreach ($objects as $object): ?>
     <li data-type="object" data-id="<?php echo $object['name']; ?>">
       <?php echo $object['name']; ?>
     </li>
-  <?php endforeach; ?> 
+  <?php endforeach; ?> -->
 </ul>
 <div class='barcode-prompt'>
   <input type='text' class='barcode-input' />

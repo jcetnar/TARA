@@ -1,5 +1,18 @@
-- Immediate tasks push to db
-- endpoints for task (date/time, location of objects involved (cabinet name and shelf id)
-- endpoint for navigation grid (stationary objects, cabinet name, wall, barcode) 
-- update db to reflect cabinet system
-- make cabinet page push to db
+- Immediate tasks 
+- update schedule tasks to get duration
+- store navigation somewhere
+
+task: task name, date/time , object location (tray RFIDs or barcode), type of task (0=bring-to-user, 1=guide-user-to), date/time end (grab from duration), repeat or not (integer) 
+
+navigation: wall (999), barcode *instructs for user to go like paper and alternate with 0s)
+
+data: code correspondig with Jess has new task/update
+
+status: code to indicate Grace has update on status and code corresponding to what it is
+
+
+
+
+once per minute Grace will send HTTP reguest 
+calendar once per min checks time stamp 
+for immediate task - 

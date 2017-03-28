@@ -76,7 +76,9 @@
           fields: {
             id: { path: "id", type: Number },
             name: { path: "name", type: String },
-            date: { path: "date", type: Date },
+            start_date: { path: "start_date", type: Date },
+            end_date: { path: "end_date", type: Date },
+            task_type: { path: "task_type", type: Boolean },         
             repeat: { path: "repeat", type: Boolean },
             objects: { path: "objects", type: String }
           }
@@ -87,17 +89,30 @@
       columns: [
         { field: "name", title: "Name" },
         { 
-          field: "date",
-          title: "Date", 
+          field: "start_date",
+          title: "Start Date", 
           columnTemplate: function (cell, item) {
             $('<input />')
               .appendTo(cell)
               .shieldDateTimePicker({
                 showButton: true,
-                value: item["date"]
+                value: item["start_date"]
               });
           }
         },
+                { 
+          field: "end_date",
+          title: "End Date", 
+          columnTemplate: function (cell, item) {
+            $('<input />')
+              .appendTo(cell)
+              .shieldDateTimePicker({
+                showButton: true,
+                value: item["end_date"]
+              });
+          }
+        },
+        { field: "task_type", title: "Task Type" },
         { field: "repeat", title: "Repeat Weekly" },
         {
           field: "objects",

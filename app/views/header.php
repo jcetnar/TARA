@@ -7,7 +7,6 @@
 <!--      <li><a href="<?php echo get_base_url() . '/about'; ?>">About</a></li> --> 
       <?php if ($isadmin): ?>
         <li><a href="<?php echo get_base_url() . '/navigation'; ?>">Room Setup</a></li>
-        <li><a href="<?php echo get_base_url() . '/cabinets' ; ?>">Shelf Setup</a></li>
         <li><a href="<?php echo get_base_url() . '/objects' ; ?>">Object Library</a></li>
         <li><a href="<?php echo get_base_url() . '/tasks' ; ?>">Scheduled Tasks</a></li>
         <li><a href="<?php echo get_base_url() . '/emergency' ; ?>">Emergency Contact</a></li>
