@@ -1,21 +1,10 @@
 <div class="task_form">
-  <h1>Create a New Task
-      <!-- Make the viewport larger than 768px wide to see that all of the form elements are inline, left aligned, and the labels are alongside.
-      --></h1>
+  <h1>Create a New Task</h1>
   <form class="form-inline">
     <div class="form-group">
       <label for="task_name">Name:</label>
       <input type="text" class="form-control" id="task_name" placeholder="Enter Name">
     </div>
-    <div class="form-group">
-      <label for="start_date">Start Date:</label>
-      <input type="datetime" class="form-control" id="start_date" placeholder="Y-m-d H:i:s">
-    </div>
-    <div class="form-group">
-      <label for="end_date">End Date:</label>
-      <input type="datetime" class="form-control" id="end_date" placeholder="Y-m-d H:i:s">
-    </div>
-<!--      Starting messy logic....-->
     <div class="checkbox">
       <label><input type="checkbox" id="task_type"> Task Type (0 Bring Objects: 1 Guide to)</label>
     </div>
@@ -29,9 +18,6 @@
         </li>
       <?php endforeach; ?>
     </ul>
-    <div class="checkbox">
-      <label><input type="checkbox" id="repeat"> Repeat Weekly</label>
-    </div>
     <button type="button" class="btn btn-default object-submit">Submit</button>
   </form>
 </div>

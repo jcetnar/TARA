@@ -19,6 +19,17 @@
       });
     }
 
+    $('#task_type').click(function() {
+        if ($(this).is(':checked')) {
+            $(".object.mobile").parent().hide();
+            $(".object.stationary").parent().show();
+        }
+        else { 
+            $(".object.mobile").parent().show();
+            $(".object.stationary").parent().hide(); 
+        }
+    }); 
+
     $('.object-submit').click(function() {
       var name = $('#task_name').val();
       var start_date = $('#start_date').val();

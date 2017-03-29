@@ -4,7 +4,7 @@
     $('.button-object-delete').click(objectDeleteHandler);
     function objectDeleteHandler() {
       //var rfid= $(this).parent().siblings('.object-rfid').text();
-      var id= $(this).parent().siblings('.object-id').text();
+      var id= $(this).data('id');
       console.log(id);
       //console.log(rfid);
       $.ajax({
@@ -16,6 +16,7 @@
           id: id
         },
         success: function(data) {
+          console.log('got to success');
           $('.object').remove();
           $('.object-form').after($('.object', data));
           $('.button-object-delete').click(objectDeleteHandler);

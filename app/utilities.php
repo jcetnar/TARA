@@ -48,16 +48,17 @@ function save_nav_grid($navigation_grid){
   return true;
 }
 
-function initiate_task_time_delay($date){
-$dateVariable      = strtotime('2010-04-09');//your date variable goes here
-$date_after_2_minutes = date('Y-m-d', strtotime('+7 days', $dateVariable));
-    return $date_after_2_minutes;
+function load_nav_grid() {
+    $nav_grid = file_get_contents('./app/data/navigation_grid');
+    return unserialize($nav_grid);
 }
 
 function add_task($name, $start_date, $end_date, $task_type, $repeat){
   $repeat = (strcasecmp($repeat, 'true') === 0) ? 1 : 0;
-//  $date = date('Y-m-d H:i:s', strtotime($date));
-  $date = date(initiate_task_time_delay('Y-m-d H:i:s'), strtotime($date));
+  $start_date = !empty($start_date) ? strtotime($start_date) : time();
+  $end_date = !empty($end_date) ? strtotime($end_date) : time();
+  $start_date = date('Y-m-d H:i:s', strtotime('+2 minutes', $start_date));
+  $end_date = date('Y-m-d H:i:s', strtotime('+2 minutes', $end_date));
   $pdo = get_pdo();
   $stmt = $pdo->prepare('INSERT INTO tasks (`name`, `start_date`, `end_date`, `task_type`, `repeat_weekly`) VALUES (:name, :start_date, :end_date, :task_type, :repeat_weekly)');
   $stmt->bindParam(':name', $name, PDO::PARAM_STR);

@@ -183,9 +183,7 @@ Flight::route('/objects', function(){
     $id = $request->data['id'];//formerly rfid
     $object_type = $request->data['object_type'];
     $object_location = $request->data['object_location'];
-   //need to edit if conditions
-    //if ((!empty($object_name) && isset($object_type) && !empty($id)) || (!empty($id) && !empty($object_method))){
-    if (!empty($object_name) && isset($object_type)){
+    if (!empty($object_name) && isset($object_type) || (!empty($id) && !empty($object_method))){
       error_log('1');
       try {
         if ($object_method == 'delete'){
@@ -222,6 +220,21 @@ Flight::route('/objects', function(){
   );
 });
 
+
+Flight::route('/immediate', function(){
+  Flight::render('header', array(), 'header_content');
+  Flight::render('immediate', array('objects' => get_objects()), 'body_content');
+  Flight::render('footer', array(), 'footer_content');
+  
+  Flight::render('layout',
+    array(
+      'title' => 'TARA Immediate Page',
+      'js' => array(
+        'app/js/immediate_form.js'
+      )
+    )
+  );
+});
 /**
  *
  */
@@ -230,7 +243,7 @@ Flight::route('/tasks', function(){
   Flight::render('task_form', array('objects' => get_objects()), 'task_form_content');
   Flight::render('task_list', array('tasks' => get_task()), 'task_list_content');
   Flight::render('tasks',array(), 'body_content');
-  // Flight::render('footer', array(), 'footer_content');
+  Flight::render('footer', array(), 'footer_content');
   Flight::render(
     'layout',
     array(
@@ -250,7 +263,7 @@ Flight::route('POST /tasks.json', function() {
   if (isadmin()) {
     $request = Flight::request();
     if ($request->data->operation === 'insert') {
-      $id = add_task($request->data->name, $request->data->date, $request->data->repeat);
+      $id = add_task($request->data->name, $request->data->start_date, $request->data->end_date, $request->data->task_type, $request->data->repeat);
       $res = link_objects($id, $request->data->objects);
       Flight::json(array('id'=>$id));
     }
@@ -330,7 +343,17 @@ Flight::route('/task_list.json', function() {
 });
 
 Flight::route('/nav_grid.json', function() {
-
+    $nav_grid = load_nav_grid();
+    $long_grid = array();
+    foreach ($nav_grid as $row) {
+        $long_grid = array_merge($long_grid, $row);
+    }
+    $nav_format = array(
+        count($nav_grid),
+        count($nav_grid[0]),
+        $long_grid,
+    );
+    Flight::json($nav_format);
 });
 
 Flight::route('/new_data.json', function() {

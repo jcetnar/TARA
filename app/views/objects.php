@@ -1,11 +1,10 @@
-Original Objects Form 
 <h2>Objects</h2>
 <table class="table table-hover">
   <thead>
     <tr>
       <th>Object Name</th>
       <th>Object Type</th>
-      <th>Shelf ID <br> if mobile object, enter shelf RFID. if stationary, enter location barcode </br> </th> <!-- formerly RFID --> 
+      <th>Shelf ID <br> if mobile object, enter tray RFID. if stationary, enter location barcode </br> </th> <!-- formerly RFID --> 
       <th>Action</th>
     </tr>
   </thead>
@@ -46,7 +45,7 @@ Original Objects Form
           <?php echo $object['location']; ?>
         </td>
         <td>
-          <button class = "button-object-delete btn btn-sm">Delete</button>
+          <button class = "button-object-delete btn btn-sm" data-id='<?php echo $object['id']; ?>'>Delete</button>
         </td>
       </tr>
     <?php endforeach; ?>
