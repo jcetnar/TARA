@@ -16,3 +16,17 @@ status: code to indicate Grace has update on status and code corresponding to wh
 once per minute Grace will send HTTP reguest 
 calendar once per min checks time stamp 
 for immediate task - 
+
+
+--do date shifted one week
+--have preliminary testing in report
+
+--read QR code while moving for NEXT week
+--get shelf going in and out to pick up tray by next week
+
+
+--all json endpoints need name fields \"width\":\"2\".\"height\":\"2\",\"array\":[\"1\",\"2\"
+
+
+
+--

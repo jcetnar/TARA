@@ -15,7 +15,6 @@
       <label for="end_date">End Date:</label>
       <input type="datetime" class="form-control" id="end_date" placeholder="Y-m-d H:i:s">
     </div>
-<!--      Starting messy logic....-->
     <div class="checkbox">
       <label><input type="checkbox" id="task_type"> Task Type (0 Bring Objects: 1 Guide to)</label>
     </div>

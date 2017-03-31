@@ -13,10 +13,10 @@
         <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">Objects Delivered to User</div>
       </div>
 </div>
-<!--
-<p class="bg-primary">Robot Picking Up Objects</p>
-<p class="bg-success">Robot Delivering Objects</p>
-<p class="bg-info">Robot Charging</p>
-<p class="bg-warning">Robot Lost</p>
-<p class="bg-danger">Robot Disconnected</p>
--->
+
+<!--Functioning Normally 100
+Working on Task 200
+Unable to Complete Task 300
+Stuck 400-->
+
+

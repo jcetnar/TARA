@@ -176,11 +176,12 @@
       drawMessage(context, mousePos.x, mousePos.y, cellSize, fontSize, [objectName]);
     });
 
+//"Done" button is not executing
     $('.submit-button').click(function() {
         $.ajax({
             url: baseURL + '/navigation',
             method: 'POST',
-            dataType: 'json',
+            dataType: 'html',
             data: {
                 navigation_grid: dataGrid,
             },
@@ -190,7 +191,7 @@
             error: function(xhr, status, error) {
                console.log(status);
                console.log(error);
-               console.log('dammnit');
+               console.log('not working');
             }   
         });
         //console.log(dataGrid);

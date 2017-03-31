@@ -68,7 +68,39 @@ Flight::route('/emergency', function() {
   Flight::render('footer', array(), 'footer_content');
   Flight::render('layout', array('title' => 'TARA Contact Page'));
 });
-
+/**
+ *
+ */
+Flight::route('/shelf', function() {
+  $request = Flight::request();
+  if ($request->method == 'POST' && isadmin()) {
+    $shelf_id = $request->data['shelf_id'];
+    $location_barcode = $request->data['location_barcode'];
+    if (!empty($shelf_id) && !empty($location_barcode)) {
+      try {
+        insert_shelf($shelf_id, $location_barcode);
+      }
+      catch (Exception $e) {
+        Flight::render(
+          'message',
+          array(
+            'message' => $e->getMessage(),
+            'severity' => 'warning'
+          ),
+          'message_content'
+        );
+      }
+    }
+  }
+  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
+  //check below
+  Flight::render('shelf', array('shelfs' => get_shelf()), 'body_content');
+  Flight::render('footer', array(), 'footer_content');
+  Flight::render('layout', array('title' => 'TARA Shelf Page', 'js' => array(
+        'app/js/shelf.js',
+      ),
+    ));
+});
 /**
  *
  */
@@ -274,72 +306,28 @@ Flight::route('POST /tasks.json', function() {
   }
 });
 
-//Flight::route('/cabinets', function(){
-//  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-//  Flight::render('cabinet_form', array(), 'task_form_content');
-//  Flight::render('cabinet_list', array('cabinet' => get_cabinet()), 'task_list_content');
-//  Flight::render('cabinets',array(), 'body_content');
-//  // Flight::render('footer', array(), 'footer_content');
-//  Flight::render(
-//    'layout',
-//    array(
-//      'title' => 'TARA Cabinet Page',
-//      'js' => array(
-//        'app/js/cabinet_form.js'
-//      )
-//    )
-//  );
-//});
-
-/**
- * jlkj
- * lkjkl
- */
-//Flight::route('POST /cabinets.json', function() {
-//  if (isadmin()) {
-//    $request = Flight::request();
-//    if ($request->data->operation === 'insert') {
-//      $id = add_task($request->data->name, $request->data->date, $request->data->repeat);
-//      $res = link_objects($id, $request->data->objects);
-//      Flight::json(array('id'=>$id));
-//    }
-//    else if ($request->data->operation === 'delete') {
-//      $task_id = $request->data->id;
-//      Flight::json(array('deleted' => task_delete($task_id)));
-//    }
-//  }
-//});
-
-//testing
-//Flight::route('/cab', function() {
-//  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-//  Flight::render('cabinet_form', array(), 'body_content');
-//  Flight::render('footer', array(), 'footer_content');
-//  Flight::render('layout', array('title' => 'TARA Home Page'));
-//});
-
-
 // for Grace, use GET to cobweb ~jcetnar/task_list.json
 Flight::route('/task_list.json', function() {
+    $list = generate_task_list();
    //array in PHP is a hash map -> key, value, store
-    $tasks = array(
-        array(
-          //keys are numbers or strings mosttimes
-            'name'=>'Get Pills',
-            'date'=>'05/29/2017 19:00:00',
-            'objects'=> array(
-                array(
-                    'name'=>'Pills',
-                    //location is the shelf RFID
-                    'location'=> '001023',
-                    //object_id is auto-generated when the object is entered
-                    'object_id'=> '1',
-                ),
-            ),
-            'repeat'=> 1,
-        ),
-    );
-    Flight::json($tasks);
+//    $tasks = array(
+//        array(
+//          //keys are numbers or strings mosttimes
+//            'name'=>'Get Pills',
+//            'date'=>'05/29/2017 19:00:00',
+//            'objects'=> array(
+//                array(
+//                    'name'=>'Pills',
+//                    //location is the shelf RFID
+//                    'location'=> '001023',
+//                    //object_id is auto-generated when the object is entered
+//                    'object_id'=> '1',
+//                ),
+//            ),
+//            'repeat'=> 1,
+//        ),
+//    );
+    Flight::json($list);
 });
 
 Flight::route('/nav_grid.json', function() {
@@ -349,9 +337,9 @@ Flight::route('/nav_grid.json', function() {
         $long_grid = array_merge($long_grid, $row);
     }
     $nav_format = array(
-        count($nav_grid),
-        count($nav_grid[0]),
-        $long_grid,
+        "width" => count($nav_grid),
+        "length" => count($nav_grid[0]),
+        "array" => $long_grid,
     );
     Flight::json($nav_format);
 });
@@ -361,7 +349,19 @@ Flight::route('/new_data.json', function() {
 });
 
 Flight::route('/status.json', function() {
-
+//find out how to read a file
+//    $str = file_get_contents('http://cobweb.seas.gwu.edu/~jcetnar/nav_grid.json');
+ $request = Flight::request();
+  if ($request->method == 'POST') {
+    $status = $request->data['status'];
+ //   error_log($status);
+ //   Flight::json(array($status));
+    file_put_contents('./app/data/status', serialize($status));
+  }
+  elseif ($request->method == 'GET') {
+    $status = file_get_contents('./app/data/status');
+        Flight::json(unserialize($status));
+  }
 });
 
 Flight::start();

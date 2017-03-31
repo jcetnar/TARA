@@ -34,6 +34,14 @@ function insert_object($object_name, $object_type, $object_location){
   return $stmt->execute();
 }
 
+function insert_shelf($shelf_id, $location_barcode){
+  $pdo = get_pdo();
+  $stmt = $pdo->prepare('INSERT INTO shelf (shelf_id, location_barcode) VALUES (:shelf_id, :location_barcode)');
+  $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);
+  $stmt->bindParam(':location_barcode', $location_barcode, PDO::PARAM_STR);
+  return $stmt->execute();
+}
+
 function insert_contact($name, $email, $phone){
   $pdo = get_pdo();
   $stmt = $pdo->prepare('INSERT INTO contact (name, email, phone) VALUES (:name, :email, :phone)');
@@ -51,6 +59,28 @@ function save_nav_grid($navigation_grid){
 function load_nav_grid() {
     $nav_grid = file_get_contents('./app/data/navigation_grid');
     return unserialize($nav_grid);
+}
+
+function generate_task_list(){
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('SELECT * FROM tasks');
+    $stmt->execute();
+    $results = $stmt->fetchAll();   
+    $tasks = array();
+    foreach ($results as $result) {
+        $stmt = $pdo->prepare('SELECT objects.* FROM objects INNER JOIN tasks_objects WHERE tasks_objects.task_id = :id');
+        $stmt->bindParam(':id', $result['id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $result['objects'] = $stmt->fetchAll();
+        $tasks[] = $result;
+    }
+    return $tasks;
+
+}
+
+function load_task_list() {
+    $task_list = file_get_contents('./app/data/task_list');
+    return unsearilize($task_list);
 }
 
 function add_task($name, $start_date, $end_date, $task_type, $repeat){
@@ -109,6 +139,14 @@ function task_delete($id) {
 function get_contact(){
   $pdo = get_pdo();
   $stmt = $pdo->prepare('SELECT name, email, phone FROM contact');
+  $stmt->execute();
+  $results = $stmt->fetchAll();
+  return $results;
+}
+
+function get_shelf(){
+  $pdo = get_pdo();
+  $stmt = $pdo->prepare('SELECT shelf_id, location_barcode FROM shelf');
   $stmt->execute();
   $results = $stmt->fetchAll();
   return $results;
