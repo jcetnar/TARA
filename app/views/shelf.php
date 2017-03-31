@@ -1,5 +1,5 @@
 <h2>Assign Shelves to Locations</h2>
-<table class="table table-hover">
+<table class="table shelf-table table-hover">
   <thead>
     <tr>
       <th>Shelf ID</th>
@@ -13,10 +13,10 @@
           <input type="text" name="shelf_id" placeholder="1" />
         </td>
         <td>
-          <input type="text" name="location_barcode" placeholder="74" />
+          <input type="text" name="location_barcode" placeholder="12" />
         </td>
         <td>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="button" class="btn-shelf-submit">Submit</button>
         </td>
       </form>
     </tr>

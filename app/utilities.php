@@ -63,7 +63,8 @@ function load_nav_grid() {
 
 function generate_task_list(){
     $pdo = get_pdo();
-    $stmt = $pdo->prepare('SELECT * FROM tasks');
+    $stmt = $pdo->prepare('SELECT * FROM tasks WHERE id > 2');
+//    only send tasks once
     $stmt->execute();
     $results = $stmt->fetchAll();   
     $tasks = array();

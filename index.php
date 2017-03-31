@@ -344,8 +344,17 @@ Flight::route('/nav_grid.json', function() {
     Flight::json($nav_format);
 });
 
-Flight::route('/new_data.json', function() {
-  
+Flight::route('/shelf.json', function() {
+      $nav_grid = load_nav_grid();
+    $long_grid = array();
+    foreach ($nav_grid as $row) {
+        $long_grid = array_merge($long_grid, $row);
+    }
+    $nav_format = array(
+        "shelf" => count($nav_grid),
+        "locations" => count($nav_grid[0]),
+    );
+    Flight::json($nav_format);
 });
 
 Flight::route('/status.json', function() {
