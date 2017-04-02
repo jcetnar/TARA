@@ -16,6 +16,7 @@
   <!-- General JS Libraries -->
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
   <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script type='text/javascript' src='app/js/status.js'></script>
   <!-- Page Specific JS -->
   <?php if (isset($js) && is_array($js)): ?>
     <?php foreach ($js as $lib): ?>
@@ -30,6 +31,9 @@
         <?php  echo $header_content; ?>
       <?php endif; ?>
     </header>
+      <div class="status-banner alert alert-success">
+          
+      </div>
     <div class='message-content'>
       <?php if(isset($message_content)): ?>
         <?php echo $message_content; ?>

@@ -359,13 +359,9 @@ Flight::route('/shelf.json', function() {
 });
 
 Flight::route('/status.json', function() {
-//find out how to read a file
-//    $str = file_get_contents('http://cobweb.seas.gwu.edu/~jcetnar/nav_grid.json');
  $request = Flight::request();
   if ($request->method == 'POST') {
     $status = $request->data['status'];
- //   error_log($status);
- //   Flight::json(array($status));
     file_put_contents('./app/data/status', serialize($status));
   }
   elseif ($request->method == 'GET') {
