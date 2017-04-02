@@ -35,6 +35,7 @@ function insert_object($object_name, $object_type, $object_location){
 }
 
 function insert_shelf($shelf_id, $location_barcode){
+  error_log('INFO - Insert Shelf');
   $pdo = get_pdo();
   $stmt = $pdo->prepare('INSERT INTO shelf (shelf_id, location_barcode) VALUES (:shelf_id, :location_barcode)');
   $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);

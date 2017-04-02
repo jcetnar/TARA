@@ -11,6 +11,7 @@
         success: function(data) {
           $('.shelf-table').html($('.shelf-table', data).children());
           $('.button-shelf-delete').click(shelfDeleteHandler);
+          $('.btn-shelf-submit').click(shelfSubmitHandler);
         },
         error: function(xhr, status, error) {
           console.log(status);
@@ -19,16 +20,16 @@
       });
     }
     
- $('.button-shelf-delete').click(shelfDeleteHandler);
+    $('.button-shelf-delete').click(shelfDeleteHandler);
 
     function shelfDeleteHandler() {
       var shelf_id= $(this).closest('tr.shelf').attr('shelf-id');
       console.log(shelf_id);
       console.log('got to the logging shelf id part');
       $.ajax({
-        url: baseURL + '/shelf.json',
+        url: baseURL + '/shelf',
         method: 'POST',
-        dataType: 'json',
+        dataType: 'html',
         data: {
           operation: 'delete',
           shelf_id: shelf_id
@@ -44,10 +45,9 @@
       });
     };
     //above here was the new stuff
-  });
-  
-
-    $('.btn-shelf-submit').click(function() {
+    $('.btn-shelf-submit').click(shelfSubmitHandler);
+            
+    function shelfSubmitHandler() {
       var shelf_id = $('#shelf_id').val();
       var location_barcode = $('#location_barcode').val();
       form_data = {
@@ -57,7 +57,7 @@
       };
       console.log(form_data);
       $.ajax({
-        url: baseURL + '/shelf.json',
+        url: baseURL + '/shelf',
         method: 'POST',
         dataType: 'html',
         data: form_data,
@@ -71,6 +71,6 @@
           console.log(error);
         }
       });
-    });
-    
+    };
+  });  
 })(jQuery);

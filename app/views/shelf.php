@@ -10,10 +10,10 @@
     <tr>
       <form action='<?php echo get_base_url() . '/shelf'; ?>' method='POST'>
         <td>
-          <input type="text" name="shelf_id" placeholder="1" />
+          <input type="text" id="shelf_id" placeholder="1" />
         </td>
         <td>
-          <input type="text" name="location_barcode" placeholder="12" />
+          <input type="text" id="location_barcode" placeholder="12" />
         </td>
         <td>
           <button type="button" class="btn-shelf-submit">Submit</button>

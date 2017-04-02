@@ -76,7 +76,9 @@ Flight::route('/shelf', function() {
   if ($request->method == 'POST' && isadmin()) {
     $shelf_id = $request->data['shelf_id'];
     $location_barcode = $request->data['location_barcode'];
+    error_log('got here');
     if (!empty($shelf_id) && !empty($location_barcode)) {
+        error_log('got past the if');
       try {
         insert_shelf($shelf_id, $location_barcode);
       }
@@ -345,8 +347,7 @@ Flight::route('/nav_grid.json', function() {
 });
 
 Flight::route('/shelf.json', function() {
-      $nav_grid = load_nav_grid();
-    $long_grid = array();
+    $nav_grid = array();
     foreach ($nav_grid as $row) {
         $long_grid = array_merge($long_grid, $row);
     }
