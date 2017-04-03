@@ -22,7 +22,7 @@
     </tr>
     <?php if (isset($shelfs)): ?>
       <?php foreach ($shelfs as $shelf): ?>
-        <tr class="shelf" shelf-id="<?php echo $shelf['shelf_id']; ?>">
+        <tr class="shelf" shelf-id="<?php echo $shelf['shelf_id'] ; ?>" location_barcode="<?php echo $shelf['location_barcode'] ; ?>">
           <td>
             <?php echo $shelf['shelf_id']; ?>
           </td>

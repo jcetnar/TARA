@@ -8,7 +8,7 @@
             dataType: 'json',
             success: function(data) {
                 $(".status-banner").text(data);
-                console.log("i ran");
+//                console.log("i ran");
             },
             error: function(xhr, status, error) {
               console.log(status);

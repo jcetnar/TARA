@@ -76,11 +76,19 @@ Flight::route('/shelf', function() {
   if ($request->method == 'POST' && isadmin()) {
     $shelf_id = $request->data['shelf_id'];
     $location_barcode = $request->data['location_barcode'];
+    $shelf_method = $request->data['operation'];
     error_log('got here');
     if (!empty($shelf_id) && !empty($location_barcode)) {
         error_log('got past the if');
       try {
-        insert_shelf($shelf_id, $location_barcode);
+          if ($shelf_method == 'delete'){
+          error_log('2');
+          $res = shelf_delete($shelf_id);
+          error_log($res);
+        }
+     else {
+         insert_shelf($shelf_id, $location_barcode);
+         }
       }
       catch (Exception $e) {
         Flight::render(

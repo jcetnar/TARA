@@ -154,6 +154,14 @@ function get_shelf(){
   return $results;
 }
 
+function shelf_delete($shelf_id){
+  $pdo = get_pdo();
+  $shelf_id = trim($shelf_id);
+  $stmt = $pdo->prepare('DELETE FROM shelf WHERE shelf_id=:shelf_id');
+  $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);
+  return $stmt->execute();
+}
+
 function link_objects($id, $objects) {
   $pdo = get_pdo();
   $res = TRUE;
