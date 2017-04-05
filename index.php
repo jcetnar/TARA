@@ -264,7 +264,7 @@ Flight::route('/objects', function(){
 
 
 Flight::route('/immediate', function(){
-  Flight::render('header', array(), 'header_content');
+  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
   Flight::render('immediate', array('objects' => get_objects()), 'body_content');
   Flight::render('footer', array(), 'footer_content');
   
