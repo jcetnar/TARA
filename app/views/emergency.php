@@ -27,18 +27,17 @@
     <?php if (isset($contacts)): ?>
       <?php foreach ($contacts as $contact): ?>
         <tr class='contact' 
-            contact-id="<?php echo $contact['contact_id'] ; ?>" 
-            contact-name="<?php echo $contact['contact_name'] ; ?>"
-            contact-email="<?php echo $contact['contact_email'] ; ?>"
-            contact-phone="<?php echo $contact['contact_phone'] ; ?>">
+            contact-name="<?php echo $contact['name'] ; ?>"
+            contact-email="<?php echo $contact['email'] ; ?>"
+            contact-phone="<?php echo $contact['phone'] ; ?>" >
           <td>
-            <?php echo $contact['contact_name']; ?>
+            <?php echo $contact['name']; ?>
           </td>
           <td>
-            <?php echo $contact['contact_email']; ?>
+            <?php echo $contact['email']; ?>
           </td>
           <td>
-            <?php echo $contact['contact_phone']; ?>
+            <?php echo $contact['phone']; ?>
           </td>
           <td>
             <button class="btn btn-sm btn-contact-delete">Delete</button>

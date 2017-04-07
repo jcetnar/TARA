@@ -23,7 +23,7 @@
     $('.btn-contact-delete').click(contactDeleteHandler);
 
     function contactDeleteHandler() {
-      var contact_id= $(this).closest('tr.contact').attr('contact-id');
+  //    var contact_id= $(this).closest('tr.contact').attr('contact-id');
       var contact_name= $(this).closest('tr.contact').attr('contact-name');
       var contact_email= $(this).closest('tr.contact').attr('contact-email');
       var contact_phone= $(this).closest('tr.contact').attr('contact-phone');
@@ -35,10 +35,10 @@
         dataType: 'html',
         data: {
           operation: 'delete',
-          contact_id: contact_id,
-          contact_name: contact_name,
-          contact_email: contact_email,
-          contact_phone: contact_phone
+//          contact_id: contact_id,
+          name: contact_name,
+          email: contact_email,
+          phone: contact_phone
         },
         success: function(data) {
           reloadTable();
@@ -53,11 +53,13 @@
     $('.btn-contact-submit').click(contactSubmitHandler);
             
     function contactSubmitHandler() {
-      var contact_id = $('#contact_id').val();
+ //     var contact_id = $('#contact_id').val();
       var contact_name = $('#contact_name').val();
+      var contact_phone = $('#contact_phone').val();
+      var contact_email = $('#contact_email').val();
       form_data = {
         "operation": "insert",
-        "contact_id": contact_id,
+   //     "contact_id": contact_id,
         "contact_name": contact_name,
         "contact_phone": contact_phone,
         "contact_email": contact_email

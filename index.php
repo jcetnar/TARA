@@ -44,12 +44,12 @@ Flight::route('/', function() {
 Flight::route('/emergency', function() {
   $request = Flight::request();
   if ($request->method == 'POST' && isadmin()) {
-    $name = $request->data['name'];
-    $email = $request->data['email'];
-    $phone = $request->data['phone'];
-    if (!empty($name) && !empty($email) && !empty($phone)) {
+    $contact_name = $request->data['name'];
+    $contact_email = $request->data['email'];
+    $contact_phone = $request->data['phone'];
+    if (!empty($contact_name) && !empty($contact_email) && !empty($contact_phone)) {
       try {
-        insert_contact($name, $email, $phone);
+        insert_contact($contact_name, $contact_email, $contact_phone);
       }
       catch (Exception $e) {
         Flight::render(
@@ -272,7 +272,7 @@ Flight::route('/immediate', function(){
     array(
       'title' => 'TARA Immediate Page',
       'js' => array(
-        'app/js/immediate_form.js'
+        'app/js/contact.js'
       )
     )
   );
@@ -355,13 +355,13 @@ Flight::route('/nav_grid.json', function() {
 });
 
 Flight::route('/shelf.json', function() {
-    $nav_grid = array();
-    foreach ($nav_grid as $row) {
+    $shelf_grid = array();
+    foreach ($shelf_grid as $row) {
         $long_grid = array_merge($long_grid, $row);
     }
-    $nav_format = array(
-        "shelf" => count($nav_grid),
-        "locations" => count($nav_grid[0]),
+    $shelf_format = array(
+        "shelf" => count($shelf_grid),
+        "locations" => count($shelf_grid[0]),
     );
     Flight::json($nav_format);
 });

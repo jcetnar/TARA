@@ -130,10 +130,10 @@ function task_delete($id) {
 //  return $stmt->execute();
 //}
 
-function insert_contact($contact_id, $contact_name, $contact_email, $contact_phone){
+function insert_contact($contact_name, $contact_email, $contact_phone){
   $pdo = get_pdo();
   $stmt = $pdo->prepare('INSERT INTO contact (id, name, email, phone) VALUES (:id, :name, :email, :phone)');
-  $stmt->bindParam(':id', $contact_id, PDO::PARAM_INT);
+ // $stmt->bindParam(':id', $contact_id, PDO::PARAM_INT);
   $stmt->bindParam(':name', $contact_name, PDO::PARAM_STR);
   $stmt->bindParam(':email', $contact_email, PDO::PARAM_STR);
   $stmt->bindParam(':phone', $contact_phone, PDO::PARAM_STR);
