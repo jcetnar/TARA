@@ -7,6 +7,7 @@ function get_base_url() {
   return '';
 }
 
+//admin
 function checkadmin($username, $password){
   $pdo = get_pdo();
   $stmt = $pdo->prepare('SELECT isadmin FROM users WHERE username=:username AND password=:password LIMIT 1');
@@ -23,35 +24,7 @@ function isadmin(){
   return (isset($_SESSION['isadmin'])) ? $_SESSION['isadmin'] : false;
 }
 
-//throws exception on sql error, caught in index.php
-function insert_object($object_name, $object_type, $object_location){
-  $pdo = get_pdo();
-  $stmt = $pdo->prepare('INSERT INTO objects (name, type, location) VALUES (:name, :type, :location)');
-  $stmt->bindParam(':name', $object_name, PDO::PARAM_STR);
-  $stmt->bindParam(':type', $object_type, PDO::PARAM_BOOL);
-  //$stmt->bindParam(':id', $id, PDO::PARAM_STR);
-  $stmt->bindParam(':location', $object_location, PDO::PARAM_STR);
-  return $stmt->execute();
-}
-
-function insert_shelf($shelf_id, $location_barcode){
-  error_log('INFO - Insert Shelf');
-  $pdo = get_pdo();
-  $stmt = $pdo->prepare('INSERT INTO shelf (shelf_id, location_barcode) VALUES (:shelf_id, :location_barcode)');
-  $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);
-  $stmt->bindParam(':location_barcode', $location_barcode, PDO::PARAM_STR);
-  return $stmt->execute();
-}
-
-function insert_contact($name, $email, $phone){
-  $pdo = get_pdo();
-  $stmt = $pdo->prepare('INSERT INTO contact (name, email, phone) VALUES (:name, :email, :phone)');
-  $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-  $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-  $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
-  return $stmt->execute();
-}
-
+//navigation
 function save_nav_grid($navigation_grid){
   file_put_contents('./app/data/navigation_grid', serialize($navigation_grid));
   return true;
@@ -62,6 +35,7 @@ function load_nav_grid() {
     return unserialize($nav_grid);
 }
 
+//task
 function generate_task_list(){
     $pdo = get_pdo();
     $stmt = $pdo->prepare('SELECT * FROM tasks WHERE id > 2');
@@ -104,14 +78,6 @@ function add_task($name, $start_date, $end_date, $task_type, $repeat){
   return $pdo->lastInsertId();
 }
 
-function get_objects(){
-  $pdo = get_pdo();
-  $stmt = $pdo->prepare('SELECT * FROM objects LIMIT 20');
-  $stmt->execute();
-  $results = $stmt->fetchAll();
-  return $results;
-}
-
 function get_task(){
   $pdo = get_pdo();
   $stmt = $pdo->prepare('SELECT id, name, start_date, end_date, task_type, repeat_weekly FROM tasks');
@@ -138,12 +104,66 @@ function task_delete($id) {
   return $stmt->execute();
 }
 
+//contact
+//function insert_contact($name, $email, $phone){
+//  $pdo = get_pdo();
+//  $stmt = $pdo->prepare('INSERT INTO contact (name, email, phone) VALUES (:name, :email, :phone)');
+//  $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+//  $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+//  $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+//  return $stmt->execute();
+//}
+//
+//function get_contact(){
+//  $pdo = get_pdo();
+//  $stmt = $pdo->prepare('SELECT name, email, phone FROM contact');
+//  $stmt->execute();
+//  $results = $stmt->fetchAll();
+//  return $results;
+//}
+//
+//function contact_delete($shelf_id){
+//  $pdo = get_pdo();
+//  $shelf_id = trim($shelf_id);
+//  $stmt = $pdo->prepare('DELETE FROM shelf WHERE shelf_id=:shelf_id');
+//  $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);
+//  return $stmt->execute();
+//}
+
+function insert_contact($contact_id, $contact_name, $contact_email, $contact_phone){
+  $pdo = get_pdo();
+  $stmt = $pdo->prepare('INSERT INTO contact (id, name, email, phone) VALUES (:id, :name, :email, :phone)');
+  $stmt->bindParam(':id', $contact_id, PDO::PARAM_INT);
+  $stmt->bindParam(':name', $contact_name, PDO::PARAM_STR);
+  $stmt->bindParam(':email', $contact_email, PDO::PARAM_STR);
+  $stmt->bindParam(':phone', $contact_phone, PDO::PARAM_STR);
+  return $stmt->execute();
+}
+
 function get_contact(){
   $pdo = get_pdo();
-  $stmt = $pdo->prepare('SELECT name, email, phone FROM contact');
+  $stmt = $pdo->prepare('SELECT id, name, email, phone FROM contact');
   $stmt->execute();
   $results = $stmt->fetchAll();
   return $results;
+}
+
+function contact_delete($contact_id){
+  $pdo = get_pdo();
+  $contact_id = trim($contact_id);
+  $stmt = $pdo->prepare('DELETE FROM contact WHERE id=:id');
+  $stmt->bindParam(':id', $contact_id, PDO::PARAM_INT);
+  return $stmt->execute();
+}
+
+//SHELF
+function insert_shelf($shelf_id, $location_barcode){
+  error_log('INFO - Insert Shelf');
+  $pdo = get_pdo();
+  $stmt = $pdo->prepare('INSERT INTO shelf (shelf_id, location_barcode) VALUES (:shelf_id, :location_barcode)');
+  $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);
+  $stmt->bindParam(':location_barcode', $location_barcode, PDO::PARAM_STR);
+  return $stmt->execute();
 }
 
 function get_shelf(){
@@ -162,22 +182,21 @@ function shelf_delete($shelf_id){
   return $stmt->execute();
 }
 
-function link_objects($id, $objects) {
+//Object
+//throws exception on sql error, caught in index.php
+function insert_object($object_name, $object_type, $object_location){
   $pdo = get_pdo();
-  $res = TRUE;
-  foreach ($objects as $object) {
-    $object_id = $object;
-    $stmt = $pdo->prepare('INSERT INTO tasks_objects (`task_id`, `object_id`) VALUES (:task_id, :object_id)');
-    $stmt->bindParam(':task_id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':object_id', $object_id, PDO::PARAM_STR);
-    $res = $stmt->execute();
-  }
-  return $res;
+  $stmt = $pdo->prepare('INSERT INTO objects (name, type, location) VALUES (:name, :type, :location)');
+  $stmt->bindParam(':name', $object_name, PDO::PARAM_STR);
+  $stmt->bindParam(':type', $object_type, PDO::PARAM_BOOL);
+  //$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+  $stmt->bindParam(':location', $object_location, PDO::PARAM_STR);
+  return $stmt->execute();
 }
 
-function get_stationary_objects(){
+function get_objects(){
   $pdo = get_pdo();
-  $stmt = $pdo->prepare('SELECT * FROM objects WHERE type = 1 LIMIT 20');
+  $stmt = $pdo->prepare('SELECT * FROM objects LIMIT 20');
   $stmt->execute();
   $results = $stmt->fetchAll();
   return $results;
@@ -189,4 +208,25 @@ function object_delete($id){
   $stmt = $pdo->prepare('DELETE FROM objects WHERE id=:id');
   $stmt->bindParam(':id', $id, PDO::PARAM_INT);
   return $stmt->execute();
+}
+
+function get_stationary_objects(){
+  $pdo = get_pdo();
+  $stmt = $pdo->prepare('SELECT * FROM objects WHERE type = 1 LIMIT 20');
+  $stmt->execute();
+  $results = $stmt->fetchAll();
+  return $results;
+}
+
+function link_objects($id, $objects) {
+  $pdo = get_pdo();
+  $res = TRUE;
+  foreach ($objects as $object) {
+    $object_id = $object;
+    $stmt = $pdo->prepare('INSERT INTO tasks_objects (`task_id`, `object_id`) VALUES (:task_id, :object_id)');
+    $stmt->bindParam(':task_id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':object_id', $object_id, PDO::PARAM_STR);
+    $res = $stmt->execute();
+  }
+  return $res;
 }

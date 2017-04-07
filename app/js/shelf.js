@@ -24,7 +24,7 @@
 
     function shelfDeleteHandler() {
       var shelf_id= $(this).closest('tr.shelf').attr('shelf-id');
-      var location_barcode= $(this).closest('tr.shelf').attr('location_barcode');
+      var location_barcode= $(this).closest('tr.shelf').attr('shelf-id');
       console.log(shelf_id);
       console.log('got to the logging shelf id part');
       $.ajax({

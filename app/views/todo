@@ -1,6 +1,4 @@
-- Immediate tasks 
-- update schedule tasks to get duration
-- store navigation somewhere
+
 
 task: task name, date/time , object location (tray RFIDs or barcode), type of task (0=bring-to-user, 1=guide-user-to), date/time end (grab from duration), repeat or not (integer) 
 
@@ -13,20 +11,14 @@ status: code to indicate Grace has update on status and code corresponding to wh
 
 
 
-once per minute Grace will send HTTP reguest 
-calendar once per min checks time stamp 
-for immediate task - 
-
-
---do date shifted one week
 --have preliminary testing in report
-
---read QR code while moving for NEXT week
---get shelf going in and out to pick up tray by next week
 
 
 --all json endpoints need name fields \"width\":\"2\".\"height\":\"2\",\"array\":[\"1\",\"2\"
 
 
 
---
+--update GANNT and time spent
+
+--count Task failures and issue alert to super user after 3
+--delete contacts, message after submission of immediate task
