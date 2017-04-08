@@ -363,7 +363,7 @@ Flight::route('/shelf.json', function() {
         "shelf" => count($shelf_grid),
         "locations" => count($shelf_grid[0]),
     );
-    Flight::json($nav_format);
+    Flight::json($shelf_format);
 });
 
 Flight::route('/status.json', function() {
