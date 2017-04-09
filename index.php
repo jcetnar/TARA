@@ -44,12 +44,18 @@ Flight::route('/', function() {
 Flight::route('/emergency', function() {
   $request = Flight::request();
   if ($request->method == 'POST' && isadmin()) {
-    $contact_name = $request->data['name'];
-    $contact_email = $request->data['email'];
-    $contact_phone = $request->data['phone'];
-    if (!empty($contact_name) && !empty($contact_email) && !empty($contact_phone)) {
+    $contact_name = $request->data['contact_name'];
+    $contact_email = $request->data['contact_email'];
+    $contact_phone = $request->data['contact_phone'];
+    $contact_id = $request->data['contact_id'];
+    if ((!empty($contact_name) && !empty($contact_email) && !empty($contact_phone)) || (!empty($contact_id))) {
       try {
-        insert_contact($contact_name, $contact_email, $contact_phone);
+        if ($request->data['operation'] == 'insert'){
+          insert_contact($contact_name, $contact_email, $contact_phone);  
+        }
+        elseif ($request->data['operation'] == 'delete'){
+          contact_delete($contact_id);  
+        }
       }
       catch (Exception $e) {
         Flight::render(
@@ -66,7 +72,13 @@ Flight::route('/emergency', function() {
   Flight::render('header', array('isadmin' => isadmin()), 'header_content');
   Flight::render('emergency', array('contacts' => get_contact()), 'body_content');
   Flight::render('footer', array(), 'footer_content');
-  Flight::render('layout', array('title' => 'TARA Contact Page'));
+  Flight::render(    'layout',
+    array(
+      'title' => 'TARA Emergency Contact Page',
+      'js' => array(
+        'app/js/contact.js',
+      ),
+    )) ;
 });
 /**
  *
@@ -362,6 +374,8 @@ Flight::route('/shelf.json', function() {
 Flight::route('/status.json', function() {
  $request = Flight::request();
   if ($request->method == 'POST') {
+    error_log('--- STATUS.json ---');
+    error_log('request method : '.$request->method);
     $status = $request->data['status'];
     file_put_contents('./app/data/status', serialize($status));
   }
@@ -370,5 +384,13 @@ Flight::route('/status.json', function() {
         Flight::json(unserialize($status));
   }
 });
+
+Flight::route('/status_test.json', function() {
+ $request = Flight::request();
+ error_log('--- TEST STATUS ---');
+ error_log('request method : '.$request->method);
+ error_log('request data : '.$request->getBody());
+});
+
 
 Flight::start();

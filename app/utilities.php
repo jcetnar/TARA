@@ -105,35 +105,10 @@ function task_delete($id) {
 }
 
 //contact
-//function insert_contact($name, $email, $phone){
-//  $pdo = get_pdo();
-//  $stmt = $pdo->prepare('INSERT INTO contact (name, email, phone) VALUES (:name, :email, :phone)');
-//  $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-//  $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-//  $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
-//  return $stmt->execute();
-//}
-//
-//function get_contact(){
-//  $pdo = get_pdo();
-//  $stmt = $pdo->prepare('SELECT name, email, phone FROM contact');
-//  $stmt->execute();
-//  $results = $stmt->fetchAll();
-//  return $results;
-//}
-//
-//function contact_delete($shelf_id){
-//  $pdo = get_pdo();
-//  $shelf_id = trim($shelf_id);
-//  $stmt = $pdo->prepare('DELETE FROM shelf WHERE shelf_id=:shelf_id');
-//  $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);
-//  return $stmt->execute();
-//}
 
 function insert_contact($contact_name, $contact_email, $contact_phone){
   $pdo = get_pdo();
-  $stmt = $pdo->prepare('INSERT INTO contact (id, name, email, phone) VALUES (:id, :name, :email, :phone)');
- // $stmt->bindParam(':id', $contact_id, PDO::PARAM_INT);
+  $stmt = $pdo->prepare('INSERT INTO contact (name, email, phone) VALUES (:name, :email, :phone)');
   $stmt->bindParam(':name', $contact_name, PDO::PARAM_STR);
   $stmt->bindParam(':email', $contact_email, PDO::PARAM_STR);
   $stmt->bindParam(':phone', $contact_phone, PDO::PARAM_STR);

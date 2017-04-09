@@ -23,22 +23,16 @@
     $('.btn-contact-delete').click(contactDeleteHandler);
 
     function contactDeleteHandler() {
-  //    var contact_id= $(this).closest('tr.contact').attr('contact-id');
-      var contact_name= $(this).closest('tr.contact').attr('contact-name');
-      var contact_email= $(this).closest('tr.contact').attr('contact-email');
-      var contact_phone= $(this).closest('tr.contact').attr('contact-phone');
-      console.log(id);
-      console.log('got to the logging contact id part');
+      var contact_id= $(this).closest('tr.contact').attr('contact-id');
+      console.log(contact_id);
+      console.log('got to the deleting contact id part');
       $.ajax({
         url: baseURL + '/emergency',
         method: 'POST',
         dataType: 'html',
         data: {
           operation: 'delete',
-//          contact_id: contact_id,
-          name: contact_name,
-          email: contact_email,
-          phone: contact_phone
+          contact_id: contact_id
         },
         success: function(data) {
           reloadTable();

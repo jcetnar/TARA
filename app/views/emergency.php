@@ -11,13 +11,13 @@
     <tr>
       <form action='<?php echo get_base_url() . '/emergency'; ?>' method='POST'>
         <td>
-          <input type="text" name="contact_name" placeholder="name" />
+          <input type="text" id="contact_name" placeholder="name" />
         </td>
         <td>
-          <input type="text" name="contact_email" placeholder="email" />
+          <input type="text" id="contact_email" placeholder="email" />
         </td>
         <td>
-          <input type="text" name="contact_phone" placeholder="phone" />
+          <input type="text" id="contact_phone" placeholder="phone" />
         </td>
         <td>
           <button type="button" class="btn btn-default btn-contact-submit">Submit</button>
@@ -27,9 +27,7 @@
     <?php if (isset($contacts)): ?>
       <?php foreach ($contacts as $contact): ?>
         <tr class='contact' 
-            contact-name="<?php echo $contact['name'] ; ?>"
-            contact-email="<?php echo $contact['email'] ; ?>"
-            contact-phone="<?php echo $contact['phone'] ; ?>" >
+            contact-id="<?php echo $contact['id'] ;?>" >
           <td>
             <?php echo $contact['name']; ?>
           </td>
