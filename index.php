@@ -355,15 +355,8 @@ Flight::route('/nav_grid.json', function() {
 });
 
 Flight::route('/shelf.json', function() {
-    $shelf_grid = array();
-    foreach ($shelf_grid as $row) {
-        $long_grid = array_merge($long_grid, $row);
-    }
-    $shelf_format = array(
-        "shelf" => count($shelf_grid),
-        "locations" => count($shelf_grid[0]),
-    );
-    Flight::json($shelf_format);
+    $shelf_grid = get_shelf_to_send(); 
+    Flight::json($shelf_grid);
 });
 
 Flight::route('/status.json', function() {
