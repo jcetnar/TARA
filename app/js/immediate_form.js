@@ -36,6 +36,12 @@
         data: form_data,
         success: function(data) {
           console.log(data);
+          $('#task_name').val('');
+          $('#task_type').prop('checked', false);
+          $('.object').prop('checked', false);
+          $(".object.mobile").parent().show();
+          $(".object.stationary").parent().show(); 
+          
         },
         error: function(xhr, status, error) {
           console.log(status);

@@ -284,7 +284,7 @@ Flight::route('/immediate', function(){
     array(
       'title' => 'TARA Immediate Page',
       'js' => array(
-        'app/js/contact.js'
+        'app/js/immediate_form.js'
       )
     )
   );
