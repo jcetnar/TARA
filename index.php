@@ -405,5 +405,11 @@ Flight::route('/status_test.json', function() {
  error_log('request data : '.$request->getBody());
 });
 
+Flight::route('/task_new.json', function() {
+   $task_status = array(
+       "new task" => true);
+    Flight::json($task_status);
+});
+
 
 Flight::start();
