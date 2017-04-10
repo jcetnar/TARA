@@ -377,11 +377,10 @@ Flight::route('/shelf.json', function() {
     $stmt = $pdo->prepare('SELECT shelf_id, location_barcode FROM shelf');
     $stmt->execute();
     $results = $stmt->fetchAll();
-  //  $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);
-  $stmt->bindParam(':location_barcode', $location_barcode, PDO::PARAM_STR);
+    $shelf = $results[0];
     $shelf_grid = array(
         "shelf" => $shelf['shelf_id'],
-        "location" => $location_barcode);
+        "location" => $shelf['location_barcode']);
     Flight::json($shelf_grid);
 });
 
