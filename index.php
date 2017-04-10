@@ -368,7 +368,7 @@ Flight::route('/nav_grid.json', function() {
 
 Flight::route('/shelf.json', function() {
     $shelf_grid = get_shelf_to_send(); 
-    Flight::json($shelf_grid);
+    Flight::json(array('shelves'=>$shelf_grid));
 });
 
 Flight::route('/status.json', function() {
