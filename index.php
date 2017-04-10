@@ -374,12 +374,14 @@ Flight::route('/nav_grid.json', function() {
 
 Flight::route('/shelf.json', function() {
     $pdo = get_pdo();
-    $stmt = $pdo->prepare('SELECT shelf_id as shelf, location_barcode as location FROM shelf');
+    $stmt = $pdo->prepare('SELECT shelf_id, location_barcode FROM shelf');
     $stmt->execute();
     $results = $stmt->fetchAll();
+  //  $stmt->bindParam(':shelf_id', $shelf_id, PDO::PARAM_STR);
+  $stmt->bindParam(':location_barcode', $location_barcode, PDO::PARAM_STR);
     $shelf_grid = array(
-        "shelf" => count($results),
-        "location" => count($results));
+        "shelf" => $shelf['shelf_id'],
+        "location" => $location_barcode);
     Flight::json($shelf_grid);
 });
 

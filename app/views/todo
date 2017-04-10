@@ -16,4 +16,4 @@ status: code to indicate Grace has update on status and code corresponding to wh
 
 --send items in task list only one time
 --count Task failures (from status from Grace) and issue alert (banner) to super user after 3
-=
+--have page for grace to see that there are new tasks because if she checks and it is empty, her program will crash
