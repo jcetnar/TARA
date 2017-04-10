@@ -149,13 +149,13 @@ function get_shelf(){
   return $results;
 }
 
-function get_shelf_to_send(){
-  $pdo = get_pdo();
-  $stmt = $pdo->prepare('SELECT shelf_id as shelf, location_barcode as location FROM shelf');
-  $stmt->execute();
-  $results = $stmt->fetchAll();
-  return $results;
-}
+//function get_shelf_to_send(){
+//  $pdo = get_pdo();
+//  $stmt = $pdo->prepare('SELECT shelf_id as shelf, location_barcode as location FROM shelf');
+//  $stmt->execute();
+//  $results = $stmt->fetchAll();
+//  return $results;
+//}
 
 function shelf_delete($shelf_id){
   $pdo = get_pdo();

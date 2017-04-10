@@ -366,9 +366,20 @@ Flight::route('/nav_grid.json', function() {
     Flight::json($nav_format);
 });
 
+//Flight::route('/shelf.json', function() {
+//    $shelf_grid = get_shelf_to_send(); 
+//    //Flight::json(array('shelves'=>$shelf_grid));
+//    Flight::json(($shelf_grid));
+//});
+
 Flight::route('/shelf.json', function() {
-    $shelf_grid = get_shelf_to_send(); 
-    //Flight::json(array('shelves'=>$shelf_grid));
+    $pdo = get_pdo();
+    $stmt = $pdo->prepare('SELECT shelf_id as shelf, location_barcode as location FROM shelf');
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $shelf_grid = array(
+        "shelf" => count($results),
+        "location" => count($results));
     Flight::json($shelf_grid);
 });
 
