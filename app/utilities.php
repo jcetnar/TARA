@@ -45,7 +45,7 @@ function generate_task_list(){
     $results = $stmt->fetchAll();   
     $tasks = array();
     foreach ($results as $result) {
-        $stmt = $pdo->prepare('SELECT objects.* FROM objects INNER JOIN tasks_objects WHERE tasks_objects.task_id = :id');
+        $stmt = $pdo->prepare('SELECT objects.* FROM tasks_objects INNER JOIN objects ON tasks_objects.object_id = objects.id WHERE tasks_objects.task_id = :id');
         $stmt->bindParam(':id', $result['id'], PDO::PARAM_INT);
         $stmt->execute();
         $result['objects'] = $stmt->fetchAll();
