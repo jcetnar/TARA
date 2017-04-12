@@ -15,5 +15,5 @@
   <button type='button' class='barcode-submit-button'>Done</button>
 </div>
 <script> 
-    var navGrid = <?php echo json_encode($grid, JSON_PARTIAL_OUTPUT_ON_ERROR) ?>;
+    var navGrid = <?php echo json_encode($grid) ?>;
 </script> 
