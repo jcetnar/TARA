@@ -406,8 +406,9 @@ Flight::route('/status_test.json', function() {
 });
 
 Flight::route('/task_new.json', function() {
+    $tasks = generate_task_list();
     $task_status = array(
-       "unread" => !empty(generate_task_list()) ? true : false);
+       "unread" => !empty($tasks) ? true : false);
     Flight::json($task_status);
 });
 
