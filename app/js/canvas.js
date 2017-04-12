@@ -61,24 +61,16 @@
       return arr;
     };
     function loadDataGrid(rows, cols, clearValue, cellSize) {
-      console.log(testGrid);
-      var navGrid = Array.matrix(rows, cols, clearValue);
-      $.ajax({
-        url: baseURL + '/nav_grid.json',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-          navGrid = Array.matrix(data.width, data.length, clearValue);
-          for (var i = 0; i < data.width; i++) {
-            navGrid[i] = data.array.splice(0, data.length);
+        var realGrid = Array.matrix(cols, rows, clearValue);
+          for (var i = 0; i < navGrid.length; i++) {
             for (var j = 0; j < navGrid[i].length; j++) {
               var y = j * cellSize + 1;
               var x = i * cellSize + 1;
-              console.log(navGrid[i][j]);
-              switch (navGrid[i][j]) {
-                  case "0": //clearValue
+              realGrid[i][j] = parseInt(navGrid[i][j]);
+              switch (realGrid[i][j]) {
+                  case clearValue: //clearValue
                     break;
-                  case "999": //wallValue
+                  case 999: //wallValue
                     fillSquare(context, x, y, cellSize, '#ff0000');
                     break;
                   default:
@@ -88,13 +80,7 @@
               }
             }
           }
-        },
-        error: function(xhr, status, error) {
-          console.log(status);
-          console.log(error);
-        }
-      });
-      return navGrid;
+      return realGrid;
     }
     var canvas = document.getElementById('grid-canvas');
     var context = canvas.getContext('2d');
@@ -103,7 +89,7 @@
     var clearValue = 0;
     var fontSize = 6;
     var dataGrid = loadDataGrid(canvas.height / cellSize, canvas.width / cellSize, clearValue, cellSize);
-
+    console.log()
     // Variables to hold where context menu was last opened.
     var contextMousePos = {};
     var contextGridCell = {};
