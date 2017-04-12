@@ -211,7 +211,7 @@ Flight::route('/navigation', function(){
     }
   }
   Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-  Flight::render('canvas', array('objects' => get_stationary_objects()), 'body_content');
+  Flight::render('canvas', array('objects' => get_stationary_objects(), 'grid' => load_nav_grid()), 'body_content');
   Flight::render(
     'layout',
     array(
@@ -406,8 +406,8 @@ Flight::route('/status_test.json', function() {
 });
 
 Flight::route('/task_new.json', function() {
-   $task_status = array(
-       "new task" => true);
+    $task_status = array(
+       "unread" => !empty(generate_task_list()) ? true : false);
     Flight::json($task_status);
 });
 

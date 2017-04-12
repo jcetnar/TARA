@@ -61,6 +61,7 @@
       return arr;
     };
     function loadDataGrid(rows, cols, clearValue, cellSize) {
+      console.log(testGrid);
       var navGrid = Array.matrix(rows, cols, clearValue);
       $.ajax({
         url: baseURL + '/nav_grid.json',
@@ -73,10 +74,11 @@
             for (var j = 0; j < navGrid[i].length; j++) {
               var y = j * cellSize + 1;
               var x = i * cellSize + 1;
+              console.log(navGrid[i][j]);
               switch (navGrid[i][j]) {
-                  case clearValue:
+                  case "0": //clearValue
                     break;
-                  case wallValue:
+                  case "999": //wallValue
                     fillSquare(context, x, y, cellSize, '#ff0000');
                     break;
                   default:

@@ -1,8 +1,8 @@
-<canvas id='grid-canvas' width='500' height='500'></canvas>
+<canvas id='grid-canvas' width='750' height='400'></canvas>
 <button type='button' class='submit-button'>Done</button>
 <!--Not sure this submit button gets executed-->
 <ul class='objects-menu'>
-  <li data-id="barcode">Barcode</li>
+  <li data-id="barcode">QR Code</li>
 <!--  Getting rid of stationary objects in nav grid-->
 <!--  <?php foreach ($objects as $object): ?>
     <li data-type="object" data-id="<?php echo $object['name']; ?>">
@@ -14,3 +14,7 @@
   <input type='text' class='barcode-input' />
   <button type='button' class='barcode-submit-button'>Done</button>
 </div>
+<script> 
+    var testGrid = <?php json_encode($grid, JSON_PARTIAL_OUTPUT_ON_ERROR) ?>;
+    <?php error_log(json_last_error()); ?>
+</script> 

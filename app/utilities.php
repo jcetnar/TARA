@@ -38,8 +38,9 @@ function load_nav_grid() {
 //task
 function generate_task_list(){
     $pdo = get_pdo();
-    $stmt = $pdo->prepare('SELECT * FROM tasks WHERE id > 2');
+    $stmt = $pdo->prepare('SELECT * FROM tasks WHERE created_at >= DATE_SUB( NOW(), INTERVAL 1 MINUTE)');
 //    only send tasks once
+    
     $stmt->execute();
     $results = $stmt->fetchAll();   
     $tasks = array();
@@ -71,7 +72,6 @@ function add_task($name, $start_date, $end_date, $task_type, $repeat){
   $stmt->bindParam(':start_date', $start_date, PDO::PARAM_STR);
   $stmt->bindParam(':end_date', $end_date, PDO::PARAM_STR);
   // I have no idea why *this* needs to be an INT but the other can be a BOOL.
-  // However MySQL has decided to not run queries any other way so sod it.
   $stmt->bindParam(':task_type', $repeat, PDO::PARAM_INT);
   $stmt->bindParam(':repeat_weekly', $repeat, PDO::PARAM_INT);
   $stmt->execute();
