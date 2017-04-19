@@ -67,6 +67,7 @@ function load_task_list() {
 
 function add_task($name, $start_date, $end_date, $task_type, $repeat){
   $repeat = (strcasecmp($repeat, 'true') === 0) ? 1 : 0;
+  $task_type = (strcasecmp($task_type, 'true') === 0) ? 1 : 0;
   $start_date = !empty($start_date) ? strtotime($start_date) : time();
   $end_date = !empty($end_date) ? strtotime($end_date) : time();
   $start_date = date('Y-m-d H:i:s', strtotime('+2 minutes', $start_date));
@@ -76,8 +77,7 @@ function add_task($name, $start_date, $end_date, $task_type, $repeat){
   $stmt->bindParam(':name', $name, PDO::PARAM_STR);
   $stmt->bindParam(':start_date', $start_date, PDO::PARAM_STR);
   $stmt->bindParam(':end_date', $end_date, PDO::PARAM_STR);
-  // I have no idea why *this* needs to be an INT but the other can be a BOOL.
-  $stmt->bindParam(':task_type', $repeat, PDO::PARAM_INT);
+  $stmt->bindParam(':task_type', $task_type, PDO::PARAM_INT);
   $stmt->bindParam(':repeat_weekly', $repeat, PDO::PARAM_INT);
   $stmt->execute();
   return $pdo->lastInsertId();

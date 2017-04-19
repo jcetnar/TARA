@@ -314,7 +314,6 @@ Flight::route('/tasks', function(){
  * lkjkl
  */
 Flight::route('POST /tasks.json', function() {
-  if (isadmin()) {
     $request = Flight::request();
     if ($request->data->operation === 'insert') {
       $id = add_task($request->data->name, $request->data->start_date, $request->data->end_date, $request->data->task_type, $request->data->repeat);
@@ -325,7 +324,6 @@ Flight::route('POST /tasks.json', function() {
       $task_id = $request->data->id;
       Flight::json(array('deleted' => task_delete($task_id)));
     }
-  }
 });
 
 // for Grace, use GET to cobweb ~jcetnar/task_list.json
@@ -366,12 +364,6 @@ Flight::route('/nav_grid.json', function() {
     Flight::json($nav_format);
 });
 
-//Flight::route('/shelf.json', function() {
-//    $shelf_grid = get_shelf_to_send(); 
-//    //Flight::json(array('shelves'=>$shelf_grid));
-//    Flight::json(($shelf_grid));
-//});
-
 Flight::route('/shelf.json', function() {
     $pdo = get_pdo();
     $stmt = $pdo->prepare('SELECT shelf_id, location_barcode FROM shelf');
@@ -389,12 +381,33 @@ Flight::route('/status.json', function() {
   if ($request->method == 'POST') {
     error_log('--- STATUS.json ---');
     error_log('request method : '.$request->method);
-    $status = $request->data['status'];
+    $new_status = $request->data['status'];
+    $status = file_get_contents('./app/data/status');
+    $status = unserialize($status);
+    $status['error_count'] = (empty($status['error_count'])) ? 0 : $status['error_count'];
+    $error_string = 'increment';
+    $reset_string = 'reset';
+    if (strcasecmp($error_string, $new_status) === 0) {
+        $status['error_count']++;
+    }
+    else if (strcasecmp($reset_string, $new_status) === 0) {
+        $new_status = $status['message'];
+        $status['error_count'] = 0;
+    }
+    $status['message'] = $new_status;
     file_put_contents('./app/data/status', serialize($status));
   }
   elseif ($request->method == 'GET') {
     $status = file_get_contents('./app/data/status');
-        Flight::json(unserialize($status));
+    $status = unserialize($status);
+    $type = 'info';
+    $message = $status['message'];
+    $warn_at_failures = 3;
+    if ($status['error_count'] >= $warn_at_failures) {
+        $type = 'warning';
+        $message = 'You done goofed!';
+    }
+    Flight::json(array('type' => $type, 'message' => $message));
   }
 });
 

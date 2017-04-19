@@ -18,7 +18,8 @@
         }
       });
     }
-
+ 
+//    Show only objects compatable with type of task
     $('#task_type').click(function() {
         if ($(this).is(':checked')) {
             $(".object.mobile").parent().hide();
@@ -29,7 +30,7 @@
             $(".object.stationary").parent().hide(); 
         }
     }); 
-
+//  Submit handler 
     $('.object-submit').click(function() {
       var name = $('#task_name').val();
       var start_date = $('#start_date').val();
@@ -55,11 +56,10 @@
       $.ajax({
         url: baseURL + '/tasks.json',
         method: 'POST',
-        dataType: 'html',
+        dataType: 'html', 
         data: form_data,
         success: function(data) {
           console.log(data);
-          // Now we will do a sloppy reload of the table.
           reloadTable();
         },
         error: function(xhr, status, error) {
@@ -68,7 +68,6 @@
         }
       });
     });
-    //below here was just added, may break everything
     $('.button-task-delete').click(taskDeleteHandler);
 
     function taskDeleteHandler() {
@@ -92,6 +91,5 @@
         }
       });
     };
-    //above here was the new stuff
   });
 })(jQuery);

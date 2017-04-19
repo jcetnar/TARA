@@ -32,7 +32,8 @@
       <?php endif; ?>
     </header>
       <div class="status-banner alert alert-success">
-          
+          <div class="status-banner-text"></div>
+          <button type="button" class="warning-confirm-button" style="display:none">Confirm</button>
       </div>
     <div class='message-content'>
       <?php if(isset($message_content)): ?>
