@@ -39,8 +39,9 @@ function load_nav_grid() {
 
 function generate_task_list(){
     $pdo = get_pdo();
-    $stmt = $pdo->prepare('SELECT * FROM tasks WHERE created_at >= DATE_SUB( NOW(), INTERVAL 1 MINUTE)');
- //$stmt = $pdo->prepare('SELECT * FROM tasks');
+ //   $stmt = $pdo->prepare('SELECT * FROM tasks WHERE created_at >= DATE_SUB( NOW(), INTERVAL 1 MINUTE)');
+    $stmt = $pdo->prepare('SELECT * FROM tasks WHERE sent = 0');
+    $stmt->bindParam(':sent', $sent, PDO::PARAM_BOOL);
 //    only send tasks once
     
     $stmt->execute();
@@ -59,7 +60,15 @@ function generate_task_list(){
     return $tasks;
 
 }
-    
+
+function update_task_sent($task_sent){
+   error_log($task_sent);
+  $pdo = get_pdo();
+  $stmt = $pdo->prepare('INSERT INTO tasks (`sent`) VALUES (:sent)');
+  $stmt->bindParam(':sent', $task_sent, PDO::PARAM_BOOL); 
+  return $stmt->execute();
+}
+
 function load_task_list() {
     $task_list = file_get_contents('./app/data/task_list');
     return unsearilize($task_list);

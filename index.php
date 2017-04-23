@@ -18,29 +18,6 @@ Flight::route('/', function() {
   Flight::render('layout', array('title' => 'TARA Home Page'));
 });
 
-/**
- *
- */
-
-//Flight::route('/about', function(){
-//  Flight::render('header', array('isadmin' => isadmin()), 'header_content');
-//  Flight::render('about', array(), 'body_content');
-//  Flight::render('footer', array(), 'footer_content');
-//  Flight::render(
-//    'layout',
-//    array(
-//      'title' => 'TARA About Page',
-//      'css' => array(
-//        'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css',
-//        'http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css',
-//      ),
-//    )
-//  );
-//});
-
-/**
- *
- */
 Flight::route('/emergency', function() {
   $request = Flight::request();
   if ($request->method == 'POST' && isadmin()) {
@@ -329,24 +306,14 @@ Flight::route('POST /tasks.json', function() {
 // for Grace, use GET to cobweb ~jcetnar/task_list.json
 Flight::route('/task_list.json', function() {
     $list = generate_task_list();
-   //array in PHP is a hash map -> key, value, store
-//    $tasks = array(
-//        array(
-//          //keys are numbers or strings mosttimes
-//            'name'=>'Get Pills',
-//            'date'=>'05/29/2017 19:00:00',
-//            'objects'=> array(
-//                array(
-//                    'name'=>'Pills',
-//                    //location is the shelf RFID
-//                    'location'=> '001023',
-//                    //object_id is auto-generated when the object is entered
-//                    'object_id'=> '1',
-//                ),
-//            ),
-//            'repeat'=> 1,
-//        ),
-//    );
+    $request = Flight::request();
+    if ($request->method == 'GET') {
+        error_log('--- Task_List.json ---');
+        error_log('request method : '.$request->method);
+        $sent = 1; 
+        error_log($sent);
+        update_task_sent($sent);
+    }
     Flight::json($list);
 });
 
