@@ -36,16 +36,49 @@ function load_nav_grid() {
 }
 
 //task
+//
+//function generate_task_list(){
+//    $pdo = get_pdo();
+// //   $stmt = $pdo->prepare('SELECT * FROM tasks WHERE created_at >= DATE_SUB( NOW(), INTERVAL 1 MINUTE)');
+//    $stmt = $pdo->prepare('SELECT * FROM tasks WHERE sent = 0');
+//   // $stmt->bindParam(':sent', $sent, PDO::PARAM_BOOL);
+////    only send tasks once
+//    
+//    $stmt->execute();
+//    $results = $stmt->fetchAll();   
+//    $tasks = array();
+//    foreach ($results as $result) {
+//        $stmt = $pdo->prepare('SELECT objects.* FROM tasks_objects INNER JOIN objects ON tasks_objects.object_id = objects.id WHERE tasks_objects.task_id = :id');
+//        $stmt->bindParam(':id', $result['id'], PDO::PARAM_INT);
+//        $stmt->execute();
+//        $objs = $stmt->fetchAll();
+//        foreach ($objs as $obj) {
+//            $result['task_objects'][] = $obj['location'];
+//        }
+//        $tasks[] = $result;
+//    }
+//    return $tasks;
+//
+//}
+//
+//function update_task_sent($task_sent){
+//   error_log($task_sent);
+//   $task_sent = $task_sent; 
+//  $pdo = get_pdo();
+//  $stmt = $pdo->prepare('INSERT INTO tasks (`sent`) VALUES (:sent)');
+//  $stmt->bindParam(':sent', $task_sent, PDO::PARAM_BOOL); 
+//  return $stmt->execute();
+//}
 
 function generate_task_list(){
     $pdo = get_pdo();
  //   $stmt = $pdo->prepare('SELECT * FROM tasks WHERE created_at >= DATE_SUB( NOW(), INTERVAL 1 MINUTE)');
     $stmt = $pdo->prepare('SELECT * FROM tasks WHERE sent = 0');
-    $stmt->bindParam(':sent', $sent, PDO::PARAM_BOOL);
+    //$stmt->bindParam(':sent', $sent, PDO::PARAM_BOOL);
 //    only send tasks once
-    
+   
     $stmt->execute();
-    $results = $stmt->fetchAll();   
+    $results = $stmt->fetchAll();  
     $tasks = array();
     foreach ($results as $result) {
         $stmt = $pdo->prepare('SELECT objects.* FROM tasks_objects INNER JOIN objects ON tasks_objects.object_id = objects.id WHERE tasks_objects.task_id = :id');
@@ -58,14 +91,12 @@ function generate_task_list(){
         $tasks[] = $result;
     }
     return $tasks;
-
 }
-
 function update_task_sent($task_sent){
    error_log($task_sent);
   $pdo = get_pdo();
-  $stmt = $pdo->prepare('INSERT INTO tasks (`sent`) VALUES (:sent)');
-  $stmt->bindParam(':sent', $task_sent, PDO::PARAM_BOOL); 
+  $stmt = $pdo->prepare('UPDATE tasks SET `sent` = 1 WHERE id = :task_id');
+  $stmt->bindParam(':task_id', $task_sent, PDO::PARAM_INT);
   return $stmt->execute();
 }
 

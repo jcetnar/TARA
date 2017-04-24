@@ -310,9 +310,9 @@ Flight::route('/task_list.json', function() {
     if ($request->method == 'GET') {
         error_log('--- Task_List.json ---');
         error_log('request method : '.$request->method);
-        $sent = 1; 
-        error_log($sent);
-        update_task_sent($sent);
+        foreach ($list as $task) {
+            update_task_sent($task['id']);
+        }
     }
     Flight::json($list);
 });
